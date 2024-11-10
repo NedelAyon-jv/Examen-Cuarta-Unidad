@@ -35,19 +35,20 @@ include "config.php";
           <div class="card-body">
             <h4 class="f-w-500 mb-1">Login with your email</h4>
 
-              <div class="mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="Email Address" required name="email" />
-              </div>
-              <div class="mb-3">
-                <input type="password" class="form-control" id="floatingInput1" placeholder="Password" required name="password" />
-              </div>
+            <div class="mb-3">
+              <input type="email" class="form-control" id="floatingInput" placeholder="Email Address" required name="email" />
+            </div>
+            <div class="mb-3">
+              <input type="password" class="form-control" id="floatingInput1" placeholder="Password" required name="password" />
+            </div>
 
 
-              <div class="d-flex mt-1 justify-content-between align-items-center">
-              </div>
-              <div class="d-grid mt-4">
-                <button type="submit" class="btn btn-primary">Login</button>
-              </div>
+            <div class="d-flex mt-1 justify-content-between align-items-center">
+            </div>
+            <div class="d-grid mt-4">
+              <button type="button" class="btn btn-primary" onclick="window.location.href='home.php'">Login</button>
+            </div>
+
           </div>
         </div>
       </div>
