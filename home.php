@@ -20,7 +20,7 @@
     </div>
     
     <!-- [ Pre-loader ] End --> 
-    <?php include "views/layouts/slider.php" ?> 
+    <?php include "views/layouts/sidebar.php" ?> 
     <?php include "views/layouts/navbar.php" ?>
     <!-- [ Main Content ] start -->
     
