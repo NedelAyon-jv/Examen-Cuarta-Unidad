@@ -46,7 +46,7 @@ include "config.php";
             <div class="d-flex mt-1 justify-content-between align-items-center">
             </div>
             <div class="d-grid mt-4">
-              <button type="button" class="btn btn-primary" onclick="window.location.href='home.php'">Login</button>
+              <button type="button" class="btn btn-primary">Login</button>
             </div>
 
           </div>
