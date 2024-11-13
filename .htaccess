@@ -6,5 +6,5 @@ RewriteEngine on
 RewriteRule ^home/?$ home.php
 RewriteRule ^products/?$ views/products/index.php 
 RewriteRule ^products/create/?$ views/products/create.php 
-RewriteRule ^products/details/?$ views/products/details.php
-RewriteRule ^products/update/?$ views/products/update.php
+RewriteRule ^products/details/([^/]+)/?$ views/products/details.php?slug=$1 [L]
+RewriteRule ^products/update/([^/]+)/?$ views/products/update.php?slug=$1 [L]
