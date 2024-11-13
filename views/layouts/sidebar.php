@@ -4,12 +4,12 @@
     <div class="m-header">
       <a href="../dashboard/index.html" class="b-brand text-primary">
         <!-- ========   Change your logo from here   ============ -->
-        <img src="<?= BASE_PATH ?>assets/images/logo-dark.svg" alt="logo image" class="logo-lg" /> 
+        <img src="<?= BASE_PATH ?>assets/images/logo-dark.svg" alt="logo image" class="logo-lg" />
       </a>
     </div>
     <div class="navbar-content">
       <ul class="pc-navbar">
-        
+
         <li class="pc-item pc-caption">
           <label>Modulos</label>
           <i class="ph-duotone ph-chart-pie"></i>
@@ -45,26 +45,34 @@
             <span class="pc-micon">
               <i class="ph-duotone ph-chart-pie"></i>
             </span>
-            <span class="pc-mtext">Catalogos</span></a
-          >
+            <span class="pc-mtext">Catalogos</span></a>
         </li>
         <li class="pc-item">
           <a href="../widget/w_chart.html" class="pc-link">
             <span class="pc-micon">
               <i class="ph-duotone ph-chart-pie"></i>
             </span>
-            <span class="pc-mtext">Cupones</span></a
-          >
+            <span class="pc-mtext">Cupones</span></a>
         </li>
         <li class="pc-item">
           <a href="../widget/w_chart.html" class="pc-link">
             <span class="pc-micon">
               <i class="ph-duotone ph-chart-pie"></i>
             </span>
-            <span class="pc-mtext">Ordenes</span></a
-          >
+            <span class="pc-mtext">Ordenes</span></a>
         </li>
-        
+
+        <li class="pc-item">
+          <a href="../widget/w_products.html" class="pc-link">
+            <span class="pc-micon">
+              <i class="ph-duotone ph-projector-screen-chart"></i>
+            </span>
+            <span class="pc-mtext">
+              Perfil
+            </span>
+          </a>
+        </li>
+
       </ul>
       <div class="card nav-action-card bg-brand-color-4">
         <div class="card-body" style="background-image: url('<?= BASE_PATH ?>assets/images/layout/nav-card-bg.svg')">
@@ -85,7 +93,7 @@
               <a href="#" class="arrow-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0,20">
                 <div class="d-flex align-items-center">
                   <div class="flex-grow-1 me-2">
-                    <h6 class="mb-0">User</h6>
+                    <h6 class="mb-0">Usuario</h6>
                     <small>Administrator</small>
                   </div>
                   <div class="flex-shrink-0">
