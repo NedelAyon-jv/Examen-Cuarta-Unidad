@@ -1,7 +1,5 @@
 <?php
-
 include "../../config.php";
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -20,8 +18,8 @@ include "../../config.php";
             <div class="loader-fill"></div>
         </div>
     </div>
-
     <!-- [ Pre-loader ] End -->
+
     <?php include "../layouts/sidebar.php" ?>
     <?php include "../layouts/navbar.php" ?>
 
@@ -50,75 +48,99 @@ include "../../config.php";
             <!-- [ breadcrumb ] end -->
 
             <!-- [ Main Content ] start -->
-            <div class="row">
-                <!-- [ sample-page ] start -->
-                <div class="col-xl-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>Información del producto</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <label class="form-label">Nombre del producto</label>
-                                <input type="text" class="form-control" placeholder="nombre del producto" />
-                            </div>
+            <form action="app/ProductsController.php" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="action" value="update_producto">
+                <input type="hidden" name="product_id" value="<?php echo $_GET['product_id']; ?>" />
 
-                            <div class="mb-3">
-                                <label class="form-label">Marca</label>
-                                <select class="form-select">
-                                    <option>Marcas</option>
-                                </select>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Información del producto</h5>
                             </div>
-                            <div class="mb-0">
-                                <label class="form-label">Descripcion del producto</label>
-                                <textarea class="form-control" placeholder="descripcion del producto"></textarea>
+                            <div class="card-body">
+                                <!-- Nombre del Producto -->
+                                <div class="mb-3">
+                                    <label class="form-label">Nombre del producto</label>
+                                    <input type="text" class="form-control" name="name" placeholder="nombre del producto" required />
+                                </div>
+
+                                <!-- Slug -->
+                                <div class="mb-3">
+                                    <label class="form-label">Slug</label>
+                                    <input type="text" class="form-control" name="slug" placeholder="slug del producto" required />
+                                </div>
+
+                                <!-- Descripción -->
+                                <div class="mb-3">
+                                    <label class="form-label">Descripción del producto</label>
+                                    <textarea class="form-control" name="description" placeholder="descripcion del producto"></textarea>
+                                </div>
+
+                                <!-- Características -->
+                                <div class="mb-3">
+                                    <label class="form-label">Características del producto</label>
+                                    <textarea class="form-control" name="features" placeholder="caracteristicas"></textarea>
+                                </div>
+
+                                <!-- Marca -->
+                                <div class="mb-3">
+                                    <label class="form-label">Marca</label>
+                                    <select class="form-select" name="brand_id" required>
+                                        <option value="">Seleccione una marca</option>
+                                        <!-- Opciones de marcas dinámicas -->
+                                        <option value="1">Marca A</option>
+                                        <option value="2">Marca B</option>
+                                        <option value="3">Marca C</option>
+                                    </select>
+                                </div>
+
+                                <!-- Palabras Claves -->
+                                <div class="mb-3">
+                                    <label class="form-label">Palabras claves</label>
+                                    <input type="text" class="form-control" name="keywords" placeholder="Ejemplo: rojo, azul, grande" />
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label">Palabras claves</label>
-                                <input type="text" class="form-control" placeholder="palabras claves(rojo, azul, grande, etc)" />
+                        </div>
+                    </div>
+                    
+                    <!-- Imagen del Producto -->
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Imagen del Producto</h5>
                             </div>
-                            <div class="mb-0">
-                                <label class="form-label">Caracteristicas del producto</label>
-                                <textarea class="form-control" placeholder="caracteristicas"></textarea>
+                            <div class="card-body">
+                                <div class="mb-0">
+                                    <p><span class="text-danger">*</span> Tamaño recomendado 800x800 </p>
+                                    <label class="btn btn-outline-secondary" for="flupld">
+                                        <i class="ti ti-upload me-2"></i> Seleccione una imagen
+                                    </label>
+                                    <input type="file" id="flupld" name="cover" class="d-none" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body text-end btn-page">
+                                <button type="submit" class="btn btn-primary mb-0">Publicar producto</button>
+                                <button type="button" onclick="window.history.back();" class="btn btn-outline-secondary mb-0">Cancelar</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Imagen del Producto</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-0">
-                            <p><span class="text-danger">*</span> Tamaño recomendado 800x800 </p>
-                            <label class="btn btn-outline-secondary" for="flupld"><i class="ti ti-upload me-2"></i> Seleccione una imagen</label>
-                            <input type="file" id="flupld" class="d-none" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-body text-end btn-page">
-                        <button class="btn btn-primary mb-0">Publicar producto</button>
-                        <button class="btn btn-outline-secondary mb-0">Cancelar</button>
-                    </div>
-                </div>
-            </div>
-            <!-- [ sample-page ] end -->
+            </form>
+            <!-- [ Main Content ] end -->
         </div>
-        <!-- [ Main Content ] end -->
-    </div>
     </div>
 
     <?php include "../layouts/footer.php" ?>
-
     <?php include "../layouts/scripts.php" ?>
-
     <?php include "../layouts/modals.php" ?>
 </body>
-<!-- [Body] end -->undefined
+<!-- [Body] end -->
 
 </html>
