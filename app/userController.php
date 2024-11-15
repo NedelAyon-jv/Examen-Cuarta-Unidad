@@ -156,5 +156,14 @@ class userController
 
         curl_close($curl);
         echo $response;
+        $response = json_decode($response);
+
+		if (isset($response->code) && $response->code > 0) {
+			
+			return $response->data;
+
+		}else{
+			return [];
+		}
     }
 }
