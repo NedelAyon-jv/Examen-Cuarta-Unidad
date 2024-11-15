@@ -1,10 +1,7 @@
 <?php
-include "../../config.php";
-include "../ProductsController.php";
 
-// Controlador para obtener los productos
-$productsController = new ProductsController();
-$products = $productsController->get();
+include "../../config.php";
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -23,8 +20,8 @@ $products = $productsController->get();
       <div class="loader-fill"></div>
     </div>
   </div>
-  <!-- [ Pre-loader ] End -->
 
+  <!-- [ Pre-loader ] End -->
   <?php include "../layouts/sidebar.php" ?>
   <?php include "../layouts/navbar.php" ?>
 
@@ -52,6 +49,7 @@ $products = $productsController->get();
       </div>
       <!-- [ breadcrumb ] end -->
 
+
       <!-- [ Main Content ] start -->
       <div class="row">
         <!-- [ sample-page ] start -->
@@ -69,12 +67,11 @@ $products = $productsController->get();
                 </ul>
               </div>
               <div class="row">
-                <?php foreach ($products as $product): ?>
                 <div class="col-sm-6 col-xl-4">
                   <div class="card product-card">
                     <div class="card-img-top">
                       <a href="ecom_product-details.html">
-                        <img src="<?= htmlspecialchars($product->cover) ?>" alt="image" class="img-prod img-fluid" />
+                        <img src="<?= BASE_PATH ?>assets/images/application/img-prod-1.jpg" alt="image" class="img-prod img-fluid" />
                       </a>
                       <div class="card-body position-absolute end-0 top-0">
                         <div class="form-check prod-likes">
@@ -85,13 +82,13 @@ $products = $productsController->get();
                     </div>
                     <div class="card-body">
                       <a href="ecom_product-details.html">
-                        <p class="prod-content mb-0 text-muted"><?= htmlspecialchars($product->name) ?></p>
+                        <p class="prod-content mb-0 text-muted">Producto</p>
                       </a>
                       <div class="d-flex align-items-center justify-content-between mt-2 mb-3 flex-wrap gap-1">
-                        <h4 class="mb-0 text-truncate"><b>$<?= number_format($product->price, 2) ?></b></h4>
+                        <h4 class="mb-0 text-truncate"><b>$299.00</b> <span class="text-sm text-muted f-w-400 text-decoration-line-through">$399.00</span></h4>
                         <div class="d-inline-flex align-items-center">
                           <i class="ph-duotone ph-star text-warning me-1"></i>
-                          <small><?= htmlspecialchars($product->description) ?></small>
+                          descripcion</small>
                         </div>
                       </div>
                       <div class="d-flex">
@@ -114,7 +111,6 @@ $products = $productsController->get();
                     </div>
                   </div>
                 </div>
-                <?php endforeach; ?>
               </div>
             </div>
           </div>
@@ -124,12 +120,15 @@ $products = $productsController->get();
       <!-- [ Main Content ] end -->
     </div>
   </div>
+  
   <!-- [ Main Content ] end -->
 
   <?php include "../layouts/footer.php" ?>
+
   <?php include "../layouts/scripts.php" ?>
+
   <?php include "../layouts/modals.php" ?>
 </body>
-<!-- [Body] end -->
+<!-- [Body] end -->undefined
 
 </html>
