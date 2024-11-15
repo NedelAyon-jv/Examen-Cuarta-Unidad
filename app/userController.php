@@ -73,7 +73,6 @@ class userController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
     }
 
     public function updateUser($name, $lastname, $email, $phone_number, $created_by, $role, $password, $id)
@@ -107,7 +106,6 @@ class userController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
     }
 
     public function deleteUser($id)
@@ -131,7 +129,6 @@ class userController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
     }
 
     public function getUser()
@@ -155,6 +152,15 @@ class userController
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+
+        $response = json_decode($response);
+
+		if (isset($response->code) && $response->code > 0) {
+			
+			return $response->data;
+
+		}else{
+			return [];
+		}
     }
 }
