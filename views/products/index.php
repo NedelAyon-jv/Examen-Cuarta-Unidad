@@ -1,7 +1,10 @@
 <?php
-
 include "../../config.php";
+include "../ProductsController.php";
 
+// Crear controlador para obtener productos
+$productsController = new ProductsController();
+$products = $productsController->get();
 ?>
 <!doctype html>
 <html lang="en">
@@ -20,8 +23,8 @@ include "../../config.php";
       <div class="loader-fill"></div>
     </div>
   </div>
-
   <!-- [ Pre-loader ] End -->
+
   <?php include "../layouts/sidebar.php" ?>
   <?php include "../layouts/navbar.php" ?>
 
@@ -49,7 +52,6 @@ include "../../config.php";
       </div>
       <!-- [ breadcrumb ] end -->
 
-
       <!-- [ Main Content ] start -->
       <div class="row">
         <!-- [ sample-page ] start -->
@@ -67,11 +69,12 @@ include "../../config.php";
                 </ul>
               </div>
               <div class="row">
+                <?php foreach ($products as $product): ?>
                 <div class="col-sm-6 col-xl-4">
                   <div class="card product-card">
                     <div class="card-img-top">
                       <a href="ecom_product-details.html">
-                        <img src="<?= BASE_PATH ?>assets/images/application/img-prod-1.jpg" alt="image" class="img-prod img-fluid" />
+                        <img src="<?= htmlspecialchars($product->cover) ?>" alt="image" class="img-prod img-fluid" />
                       </a>
                       <div class="card-body position-absolute end-0 top-0">
                         <div class="form-check prod-likes">
@@ -82,13 +85,13 @@ include "../../config.php";
                     </div>
                     <div class="card-body">
                       <a href="ecom_product-details.html">
-                        <p class="prod-content mb-0 text-muted">Producto</p>
+                        <p class="prod-content mb-0 text-muted"><?= htmlspecialchars($product->name) ?></p>
                       </a>
                       <div class="d-flex align-items-center justify-content-between mt-2 mb-3 flex-wrap gap-1">
-                        <h4 class="mb-0 text-truncate"><b>$299.00</b> <span class="text-sm text-muted f-w-400 text-decoration-line-through">$399.00</span></h4>
+                        <h4 class="mb-0 text-truncate"><b>$<?= number_format($product->price, 2) ?></b></h4>
                         <div class="d-inline-flex align-items-center">
                           <i class="ph-duotone ph-star text-warning me-1"></i>
-                          descripcion</small>
+                          <small><?= htmlspecialchars($product->description) ?></small>
                         </div>
                       </div>
                       <div class="d-flex">
@@ -111,6 +114,7 @@ include "../../config.php";
                     </div>
                   </div>
                 </div>
+                <?php endforeach; ?>
               </div>
             </div>
           </div>
@@ -120,15 +124,12 @@ include "../../config.php";
       <!-- [ Main Content ] end -->
     </div>
   </div>
-  
   <!-- [ Main Content ] end -->
 
   <?php include "../layouts/footer.php" ?>
-
   <?php include "../layouts/scripts.php" ?>
-
   <?php include "../layouts/modals.php" ?>
 </body>
-<!-- [Body] end -->undefined
+<!-- [Body] end -->
 
 </html>
