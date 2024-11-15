@@ -106,8 +106,8 @@ $products = $productsController->get();
                         </div>
                         <div class="flex-grow-1 ms-3">
                           <div class="d-grid">
-                            <button class="btn btn-link-secondary btn-prod-card">Editar</button>
-                            <button class="btn btn-link-secondary btn-prod-card">Eliminar</button>
+                          <a href="update.php?product_id=<?= $product->id ?>" class="btn btn-link-secondary btn-prod-card">Editar</a>
+                          <button class="btn btn-link-secondary btn-prod-card">Eliminar</button>
                           </div>
                         </div>
                       </div>
