@@ -73,6 +73,15 @@ class userController
         $response = curl_exec($curl);
 
         curl_close($curl);
+        $response = json_decode($response);
+        if (isset($response->code) && $response->code > 0) {
+			
+			header("Location:" . BASE_PATH . "home?status=ok");
+
+		}else{
+			
+			header("Location:" . BASE_PATH . "home?status=error");
+		}
     }
 
     public function updateUser($name, $lastname, $email, $phone_number, $created_by, $role, $password, $id)
@@ -106,6 +115,15 @@ class userController
         $response = curl_exec($curl);
 
         curl_close($curl);
+        $response = json_decode($response);
+        if (isset($response->code) && $response->code > 0) {
+			
+			header("Location:" . BASE_PATH . "home?status=ok");
+
+		}else{
+			
+			header("Location:" . BASE_PATH . "home?status=error");
+		}
     }
 
     public function deleteUser($id)
@@ -129,6 +147,15 @@ class userController
         $response = curl_exec($curl);
 
         curl_close($curl);
+        $response = json_decode($response);
+        if (isset($response->code) && $response->code > 0) {
+			
+			header("Location:" . BASE_PATH . "home?status=ok");
+
+		}else{
+			
+			header("Location:" . BASE_PATH . "home?status=error");
+		}
     }
 
     public function getUser()
