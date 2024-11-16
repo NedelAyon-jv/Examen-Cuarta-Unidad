@@ -107,7 +107,12 @@ $products = $productsController->get();
                         <div class="flex-grow-1 ms-3">
                           <div class="d-grid">
                           <a href="update.php?product_id=<?= $product->id ?>" class="btn btn-link-secondary btn-prod-card">Editar</a>
-                          <button class="btn btn-link-secondary btn-prod-card">Eliminar</button>
+                          <form action="app/ProductsController.php" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
+                           <input type="hidden" name="action" value="delete_producto">
+                           <input type="hidden" name="product_id" value="<?= htmlspecialchars($product->id) ?>">
+                           <button type="submit" class="btn btn-link-secondary btn-prod-card">Eliminar</button>
+                          </form>
+
                           </div>
                         </div>
                       </div>
