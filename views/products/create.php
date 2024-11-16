@@ -1,5 +1,6 @@
 <?php
 include "../../config.php";
+include "app/ProductsController.php";
 ?>
 <!doctype html>
 <html lang="en">
@@ -130,7 +131,7 @@ include "../../config.php";
             formData.append('action', 'crear_producto');
 
             try {
-                const response = await fetch('ProductsController.php', {
+                const response = await fetch('app/ProductsController.php', {
                     method: 'POST',
                     body: formData
                 });
@@ -139,11 +140,15 @@ include "../../config.php";
                 const messageElement = document.getElementById('responseMessage');
 
                 if (result.code > 0) {
-                    alert('Producto creado exitosamente.');
-                    this.reset(); 
-                } else {
-                    alert('Error al crear el producto.');
-                }
+                 messageElement.textContent = 'Producto creado exitosamente.';
+                 messageElement.className = 'alert alert-success';
+                 messageElement.classList.remove('d-none');
+                 this.reset();
+                 } else {
+                     messageElement.textContent = 'Error al crear el producto.';
+                     messageElement.className = 'alert alert-danger';
+                     messageElement.classList.remove('d-none');
+                    }
             } catch (error) {
                 console.error('Error:', error);
                 alert('Error al conectar con el servidor.');
