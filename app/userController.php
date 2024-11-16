@@ -1,8 +1,6 @@
 <?php
-require_once "../config.php";
-
 session_start();
-
+include_once __DIR__ . '/../config.php';
 
 if (isset($_POST['action'])) {
 
