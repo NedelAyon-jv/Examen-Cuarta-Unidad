@@ -52,9 +52,9 @@
 
 				$_SESSION['user_data'] = $response->data;
 
-				header("Location: <?= BASE_PATH ?>home");
+				header("Location:" . BASE_PATH . "home");
 			}else{
-				header("Location: <?= BASE_PATH ?>index.php");
+				header("Location:" . BASE_PATH . "index.php");
 			}
 
 		}
