@@ -1,14 +1,13 @@
-<?php 
+<?php
 include "../../config.php";
 include "../../app/ProductsController.php";
 
-// Crear controlador para obtener productos
 $productsController = new ProductsController();
+
 $products = $productsController->get();
 
-// Asegúrate de que $products es un array válido antes de intentar iterar
 if (!is_array($products)) {
-    $products = []; // Si no es un array, inicializa como vacío
+    $products = []; 
 }
 ?>
 <!doctype html>
@@ -82,7 +81,7 @@ if (!is_array($products)) {
                       <div class="card product-card">
                         <div class="card-img-top">
                           <a href="ecom_product-details.html">
-                            <img src="<?= htmlspecialchars($product->cover) ?>" alt="image" class="img-prod img-fluid" />
+                            <img src="<?= htmlspecialchars($product->cover ?? 'path/to/default-image.jpg') ?>" alt="Product Image" class="img-prod img-fluid" />
                           </a>
                           <div class="card-body position-absolute end-0 top-0">
                             <div class="form-check prod-likes">
@@ -93,13 +92,13 @@ if (!is_array($products)) {
                         </div>
                         <div class="card-body">
                           <a href="ecom_product-details.html">
-                            <p class="prod-content mb-0 text-muted"><?= htmlspecialchars($product->name) ?></p>
+                            <p class="prod-content mb-0 text-muted"><?= htmlspecialchars($product->name ?? 'Unnamed Product') ?></p>
                           </a>
                           <div class="d-flex align-items-center justify-content-between mt-2 mb-3 flex-wrap gap-1">
-                            <h4 class="mb-0 text-truncate"><b>$<?= number_format($product->price, 2) ?></b></h4>
+                            <h4 class="mb-0 text-truncate"><b>$<?= number_format($product->price ?? 0, 2) ?></b></h4>
                             <div class="d-inline-flex align-items-center">
                               <i class="ph-duotone ph-star text-warning me-1"></i>
-                              <small><?= htmlspecialchars($product->description) ?></small>
+                              <small><?= htmlspecialchars($product->description ?? 'No description available') ?></small>
                             </div>
                           </div>
                           <div class="d-flex">
@@ -116,9 +115,9 @@ if (!is_array($products)) {
                               <div class="d-grid">
                                 <a href="update.php?product_id=<?= $product->id ?>" class="btn btn-link-secondary btn-prod-card">Editar</a>
                                 <form action="app/ProductsController.php" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
-                                 <input type="hidden" name="action" value="delete_producto">
-                                 <input type="hidden" name="product_id" value="<?= htmlspecialchars($product->id) ?>">
-                                 <button type="submit" class="btn btn-link-secondary btn-prod-card">Eliminar</button>
+                                  <input type="hidden" name="action" value="delete_producto">
+                                  <input type="hidden" name="product_id" value="<?= htmlspecialchars($product->id) ?>">
+                                  <button type="submit" class="btn btn-link-secondary btn-prod-card">Eliminar</button>
                                 </form>
                               </div>
                             </div>
