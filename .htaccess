@@ -13,4 +13,6 @@ RewriteRule ^users/?$ views/user/users.php
 RewriteRule ^users/details/?$ views/user/details_u.php
 RewriteRule ^users/create/?$ views/user/create_u.php
 RewriteRule ^users/update/?$ views/user/update_u.php
-RewriteRule ^catalogo/cruds/?$ views/catalogo/cruds.php
+RewriteRule ^catalogo/categorias/?$ views/catalogo/categorias.php
+RewriteRule ^catalogo/etiquetas/?$ views/catalogo/etiquetas.php
+RewriteRule ^catalogo/marcas/?$ views/catalogo/marcas.php

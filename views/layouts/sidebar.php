@@ -17,7 +17,7 @@
         <li class="pc-item">
           <a href="../widget/w_products.html" class="pc-link">
             <span class="pc-micon">
-              <i class="ph-duotone ph-projector-screen-chart"></i>
+              <i class="ph-duotone ph-layout"></i>
             </span>
             <span class="pc-mtext">
               Productos
@@ -35,29 +35,35 @@
         <li class="pc-item">
           <a href="../widget/w_data.html" class="pc-link">
             <span class="pc-micon">
-              <i class="ph-duotone ph-database"></i>
+              <i class="ph-duotone ph-identification-badge"></i>
             </span>
             <span class="pc-mtext">Clientes</span>
           </a>
         </li>
-        <li class="pc-item">
-          <a href="../widget/w_chart.html" class="pc-link">
+        <li class="pc-item pc-hasmenu">
+          <a href="#!" class="pc-link">
             <span class="pc-micon">
-              <i class="ph-duotone ph-chart-pie"></i>
+              <i class="ph-duotone ph-shopping-cart"></i>
             </span>
-            <span class="pc-mtext">Catalogos</span></a>
+            <span class="pc-mtext">Catalogos</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span
+          ></a>
+          <ul class="pc-submenu">
+            <li class="pc-item"><a class="pc-link" href="../application/ecom_product.html">Categorias</a></li>
+            <li class="pc-item"><a class="pc-link" href="../application/ecom_product-details.html">Marcas</a></li>
+            <li class="pc-item"><a class="pc-link" href="../application/ecom_product-list.html">Etiquetas</a></li>
+          </ul>
         </li>
         <li class="pc-item">
           <a href="../widget/w_chart.html" class="pc-link">
             <span class="pc-micon">
-              <i class="ph-duotone ph-chart-pie"></i>
+              <i class="ph-duotone ph-currency-circle-dollar"></i>
             </span>
             <span class="pc-mtext">Cupones</span></a>
         </li>
         <li class="pc-item">
           <a href="../widget/w_chart.html" class="pc-link">
             <span class="pc-micon">
-              <i class="ph-duotone ph-chart-pie"></i>
+              <i class="ph-duotone ph-newspaper"></i>
             </span>
             <span class="pc-mtext">Ordenes</span></a>
         </li>
@@ -65,7 +71,7 @@
         <li class="pc-item">
           <a href="../widget/w_products.html" class="pc-link">
             <span class="pc-micon">
-              <i class="ph-duotone ph-projector-screen-chart"></i>
+              <i class="ph-duotone ph-user-circle"></i>
             </span>
             <span class="pc-mtext">
               Perfil

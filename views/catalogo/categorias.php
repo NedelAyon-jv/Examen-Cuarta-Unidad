@@ -56,13 +56,7 @@
               <div class="text-end p-sm-4 pb-sm-2">
                 <div class="row">
                   <div class="col-md-6">
-                    <label for="catalogType">Tipo de catalogo:</label>
-                    <select id="catalogType" class="form-control" onchange="updateTable()">
-                      <option value="">Seleccción de tipo:</option>
-                      <option value="categoria">Por categoria</option>
-                      <option value="marca">Por marca</option>
-                      <option value="tags">Por etiquetas</option>
-                    </select>
+                    <label for="catalogType">Categorias:</label>
                   </div>
                 </div>
               </div>
@@ -145,7 +139,7 @@
   <!-- Required Js -->
 
   <?php include "../layouts/scripts.php" ?>
-  <?php include "../layouts/.modals.php" ?>
+  <?php include "../layouts/modals.php" ?>
 
   <!-- [Page Specific JS] start -->
   <script src="../assets/js/plugins/simple-datatables.js"></script>
