@@ -10,3 +10,4 @@ RewriteRule ^products/details/([^/]+)/?$ views/products/details.php?slug=$1 [L]
 RewriteRule ^products/update/([^/]+)/?$ views/products/update.php?slug=$1 [L]
 RewriteRule ^profile/?$ views/profile/profile.php 
 RewriteRule ^users/?$ views/user/users.php
+RewriteRule ^users/details/?$ views/user/details_u.php
