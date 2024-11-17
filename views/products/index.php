@@ -81,7 +81,7 @@ if (!is_array($products)) {
                       <div class="card product-card">
                         <div class="card-img-top">
                           <a href="ecom_product-details.html">
-                            <img src="<?= $product->cover ?>" alt="image" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=<?php echo urlencode($product->name); ?>';" alt="Product Image" class="img-prod img-fluid" />
+                            <img src="<?= $product->cover ?>" alt="image" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=<?php echo urlencode($product->name); ?>';" alt="Product Image"class="img-prod img-fluid" style="height: 400px" />
                           </a>
                           <div class="card-body position-absolute end-0 top-0">
                             <div class="form-check prod-likes">

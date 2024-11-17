@@ -13,3 +13,4 @@ RewriteRule ^users/?$ views/user/users.php
 RewriteRule ^users/details/?$ views/user/details_u.php
 RewriteRule ^users/create/?$ views/user/create_u.php
 RewriteRule ^users/update/?$ views/user/update_u.php
+RewriteRule ^catalogo/cruds/?$ views/catalogo/cruds.php
