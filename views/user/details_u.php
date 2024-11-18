@@ -4,7 +4,10 @@
 <?php
 
 include "../../config.php";
+include_once "../../app/userController.php";
+$userController = new userController();
 
+$usuario = $userController->getUserById($_GET['id']);
 ?>
 
 <head>
@@ -68,13 +71,12 @@ include "../../config.php";
                       <div class="chat-avtar d-inline-flex mx-auto">
                         <img
                           class="rounded-circle img-fluid wid-90 img-thumbnail"
-                          src="../assets/images/user/avatar-1.jpg"
-                          alt="User image"
+                          src=<?= $usuario->avatar ?>" alt="image" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=<?php echo urlencode($usuario->name); ?>';"
                         />
                         <i class="chat-badge bg-success me-2 mb-2"></i>
                       </div>
-                      <h5 class="mb-0">Nombre completo</h5>
-                      <p class="text-muted text-sm"><a href="#" class="link-primary"> correo </a></p>
+                      <h5 class="mb-0"><?= $usuario->name ?> <?= $usuario->lastname ?> </h5>
+                      <p class="text-muted text-sm"><a href="#" class="link-primary"> <?= $usuario->email ?> </a></p>
                       <div class="row g-3">
                       
                       </div>
@@ -124,11 +126,11 @@ include "../../config.php";
                             <div class="row">
                               <div class="col-md-6">
                                 <p class="mb-1 text-muted">Nombre(s):</p>
-                                <p class="mb-0">nombres(s)</p>
+                                <p class="mb-0"><?= $usuario->name ?></p>
                               </div>
                               <div class="col-md-6">
                                 <p class="mb-1 text-muted">Apellido(s):</p>
-                                <p class="mb-0">Apellido(s)</p>
+                                <p class="mb-0"><?= $usuario->lastname ?></p>
                               </div>
                             </div>
                           </li>
@@ -136,7 +138,7 @@ include "../../config.php";
                             <div class="row">
                               <div class="col-md-6">
                                 <p class="mb-1 text-muted">Telefono:</p>
-                                <p class="mb-0">telefono</p>
+                                <p class="mb-0"><?= !empty($usuario->phone_number) ? $usuario->phone_number : 'No se encuentra un registro telefónico.' ?></p>
                               </div>
                             </div>
                           </li>
@@ -144,11 +146,11 @@ include "../../config.php";
                             <div class="row">
                               <div class="col-md-6">
                                 <p class="mb-1 text-muted">Email:</p>
-                                <p class="mb-0">Email@example.com</p>
+                                <p class="mb-0"><?= $usuario->email ?></p>
                               </div>
                               <div class="col-md-6">
                                 <p class="mb-1 text-muted">Rol:</p>
-                                <p class="mb-0">(rol)</p>
+                                <p class="mb-0"><?= $usuario->role ?></p>
                               </div>
                             </div>
                           </li>
