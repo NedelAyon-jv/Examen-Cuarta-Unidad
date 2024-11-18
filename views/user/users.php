@@ -54,7 +54,7 @@ $users = $userController->getUser();
                                 <br>
                             </div>
                             <br>
-                            <a class="btn btn-outline-secondary shadow-sm rounded-pill px-4" href= "<?php echo BASE_PATH . "users/create/" ?>">Agregar usuario</a>
+                            <a class="btn btn-outline-secondary shadow-sm rounded-pill px-4" href="<?php echo BASE_PATH . "users/create/" ?>">Agregar usuario</a>
 
 
                         </div>
@@ -94,7 +94,7 @@ $users = $userController->getUser();
                                     <!-- Separador e informaci贸n adicional -->
                                     <div class="border-top border-light my-3 pt-2 text-center">
                                         <a href=""></a>
-                                        <a class="btn text-dark border border-dark bg-transparent rounded-pill" href= "<?php echo BASE_PATH . "users/details/" . $user->id; ?>"> Ver mas informaci贸n...</a>
+                                        <a class="btn text-dark border border-dark bg-transparent rounded-pill" href="<?php echo BASE_PATH . "users/details/" . $user->id; ?>"> Ver mas informaci贸n...</a>
 
                                     </div>
                                     <div class="text-center mb-3">
@@ -103,12 +103,18 @@ $users = $userController->getUser();
                                     </div>
                                     <!-- Botones -->
                                     <div class="d-flex justify-content-around">
-                                        <a class="btn btn-primary shadow-sm rounded-pill px-4" href= "<?php echo BASE_PATH . "users/details/" . $user->id; ?>">Editar usuario</a>
-                                        <form action="../../app/userController.php" method="POST" id="deleteUserForm-<?=$user->id ?>" >
+                                        <a class="btn btn-primary shadow-sm rounded-pill px-4" href="<?php echo BASE_PATH . "users/update/" . $user->id; ?>"
+                                            data-id="<?php echo $user->id; ?>"
+                                            data-name="<?php echo htmlspecialchars($user->name, ENT_QUOTES); ?>"
+                                            data-lastname="<?php echo htmlspecialchars($user->lastname, ENT_QUOTES); ?>"
+                                            data-email="<?php echo htmlspecialchars($user->email, ENT_QUOTES); ?>"
+                                            data-phone_number="<?php echo htmlspecialchars($user->phone_number, ENT_QUOTES); ?>"
+                                            data-password="<?php echo htmlspecialchars($user->password, ENT_QUOTES); ?>">Editar usuario</a>
+                                        <form action="../../app/userController.php" method="POST" id="deleteUserForm-<?= $user->id ?>">
                                             <input type="text" hidden name="action" value="delete_user">
                                             <input type="hidden" name="id" value="<?= $user->id ?>">
                                         </form>
-                                        <button class="btn shadow-sm btn-danger rounded-pill px-4 deleteUser" value="<?= $user -> id ?>">Borrar usuario</button>
+                                        <button class="btn shadow-sm btn-danger rounded-pill px-4 deleteUser" value="<?= $user->id ?>">Borrar usuario</button>
                                     </div>
                                 </div>
                             </div>
@@ -129,38 +135,58 @@ $users = $userController->getUser();
 
     <!-- Required Js -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    let deleteUser = document.querySelectorAll('.deleteUser');
-    deleteUser.forEach(button => {
-        button.addEventListener('click', function () {
-            swal({
-                title: "¿Estás seguro?",
-                text: "¡Una vez eliminado, no podrás recuperar esta información!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    const form = document.getElementById(`deleteUserForm-${button.value}`);
-                    if (form) {
-                        form.submit();
-                        swal("¡La información ha sido eliminada!", {
-                            icon: "success",
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let deleteUser = document.querySelectorAll('.deleteUser');
+            deleteUser.forEach(button => {
+                button.addEventListener('click', function() {
+                    swal({
+                            title: "¿Estás seguro?",
+                            text: "¡Una vez eliminado, no podrás recuperar esta información!",
+                            icon: "warning",
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                const form = document.getElementById(`deleteUserForm-${button.value}`);
+                                if (form) {
+                                    form.submit();
+                                    swal("¡La información ha sido eliminada!", {
+                                        icon: "success",
+                                    });
+                                } else {
+                                    console.error(`Formulario con id deleteUserForm-${button.value} no encontrado.`);
+                                }
+                            }
                         });
-                    } else {
-                        console.error(`Formulario con id deleteUserForm-${button.value} no encontrado.`);
-                    }
-                }
+                });
             });
         });
-    });
-});
+        document.addEventListener('DOMContentLoaded', function() {
+            const editButtons = document.querySelectorAll('.editButton');
+            editButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const userId = this.dataset.id;
+                    const userName = this.dataset.name;
+                    const userLastname = this.dataset.lastname;
+                    const userEmail = this.dataset.email;
+                    const userPhoneNumber = this.dataset.phone_number;
+                    const userPassword = this.dataset.password;
 
+                    document.getElementById('idEdit').value = userId;
+                    document.getElementById('nameEdit').value = userName;
+                    document.getElementById('lastnameEdit').value = userLastname;
+                    document.getElementById('emailEdit').value = userEmail;
+                    document.getElementById('phone_numberEdit').value = userPhoneNumber;
+                    document.getElementById('passwordEdit').value = userPassword;
 
-
-</script>
+                    const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+                    editModal.show();
+                });
+            });
+        });
+    </script>
 </body>
 <!-- [Body] end -->
 

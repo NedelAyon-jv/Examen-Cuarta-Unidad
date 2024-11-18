@@ -1,7 +1,12 @@
 <!doctype html>
 <html lang="en">
 <!-- [Head] start -->
-<?php include "../../config.php"; ?>
+<?php include "../../config.php"; 
+include_once "../../app/userController.php";
+$userController = new userController();
+$user = $userController->getUserById($_GET['id']);
+?>
+
 
 <head>
     <?php include "../layouts/head.php"; ?>
@@ -65,16 +70,18 @@
                             <h5>Actualiza los datos a tu preferencia</h5>
                         </div>
                         <div class="card-body">
-                            <form>
+                            <form id="editForm" method="POST" action="../../app/userController.php">
+                                <input type="text" hidden name="action" value="update_user">
+                                <input type="text" hidden name="id" value="<?= $user->id ?>">
                                 <div class="row mb-3">
                                     <label class="col-lg-2 col-form-label">Nombre(s):</label>
                                     <div class="col-lg-4">
-                                        <input type="text" class="form-control" placeholder="Ingresar tu nombre(s)" />
+                                        <input type="text" class="form-control" placeholder="Ingresar tu nombre(s)" name="name" id="nameEdit"/ value="<?= $user->name ?>"">
                                         <small class="form-text text-muted">Ingrese su Nombre(s)</small>
                                     </div>
                                     <label class="col-lg-2 col-form-label">Apellido(s):</label>
                                     <div class="col-lg-4">
-                                        <input type="text" class="form-control" placeholder="Ingresar tu apellido(s)" />
+                                        <input type="text" class="form-control" placeholder="Ingresar tu apellido(s)" name="lastname" id="lastnameEdit"/ value="<?= $user->lastname ?>"">
                                         <small class="form-text text-muted">Ingrese su Apellido(s)</small>
                                     </div>
 
@@ -85,12 +92,12 @@
                                 <div class="row mb-3">
                                     <label class="col-lg-2 col-form-label">Correo Electrónico:</label>
                                     <div class="col-lg-4">
-                                        <input type="email" class="form-control" placeholder="Ingresar tu Correo Electrónico" />
+                                        <input type="email" class="form-control" placeholder="Ingresar tu Correo Electrónico" name="email" id="emailEdit" value="<?= $user->email ?>"/>
                                         <small class="form-text text-muted">Ingresar tu Correo Electrónico</small>
                                     </div>
                                     <label class="col-lg-2 col-form-label">Número telefónico:</label>
                                     <div class="col-lg-4">
-                                        <input type="text" class="form-control" placeholder="Ingresar tu número telefónico" />
+                                        <input type="text" class="form-control" placeholder="Ingresar tu número telefónico" name="phone_number" id="phone_numberEdit" value="<?= $user->phone_number ?>"/>
                                         <small class="form-text text-muted">Ingresar tu número telefónico</small>
                                     </div>
                                 </div>
@@ -98,7 +105,7 @@
                                     <label class="col-lg-2 col-form-label">Contraseña:</label>
                                     <div class="col-lg-3">
                                         <div class="input-group search-form">
-                                            <input type="password" class="form-control" placeholder="Ingresar tu Contraseña" />
+                                            <input type="password" class="form-control" placeholder="Ingresar tu Contraseña" name="password" id="passwordEdit" value="<?= $user->password ?>"/>
                                             <span class="input-group-text bg-transparent"><i class="feather icon-lock"></i></span>
                                         </div>
                                         <small class="form-text text-muted">Ingresar tu Contraseña</small>
@@ -135,6 +142,7 @@
     <?php include "../layouts/footer.php"; ?>
     <?php include "../layouts/scripts.php"; ?>
     <?php include "../layouts/modals.php"; ?>
+
     <!-- [ Footer & Scripts ] end -->
 </body>
 <!-- [Body] end -->
