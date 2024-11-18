@@ -2,8 +2,9 @@
 <html lang="en">
 <!-- [Head] start -->
 <?php
-
+session_start();
 include "../../config.php";
+
 
 ?>
 
@@ -73,8 +74,8 @@ include "../../config.php";
                         />
                         <i class="chat-badge bg-success me-2 mb-2"></i>
                       </div>
-                      <h5 class="mb-0">Nombre completo</h5>
-                      <p class="text-muted text-sm"><a href="#" class="link-primary"> correo </a></p>
+                      <h5 class="mb-0"> <?= $_SESSION['user_data']-> name?> <?= $_SESSION['user_data']-> lastname?></h5>
+                      <p class="text-muted text-sm"><a href="#" class="link-primary"> <?= $_SESSION['user_data']-> email?> </a></p>
                       <div class="row g-3">
                         <div class="col-4">
                           <h5 class="mb-0">?cantidad</h5>
@@ -131,11 +132,11 @@ include "../../config.php";
                             <div class="row">
                               <div class="col-md-6">
                                 <p class="mb-1 text-muted">Nombre(s):</p>
-                                <p class="mb-0">nombres(s)</p>
+                                <p class="mb-0"><?= $_SESSION['user_data']-> name?></p>
                               </div>
                               <div class="col-md-6">
                                 <p class="mb-1 text-muted">Apellido(s):</p>
-                                <p class="mb-0">Apellido(s)</p>
+                                <p class="mb-0"><?= $_SESSION['user_data']-> lastname?></p>
                               </div>
                             </div>
                           </li>
@@ -143,7 +144,7 @@ include "../../config.php";
                             <div class="row">
                               <div class="col-md-6">
                                 <p class="mb-1 text-muted">Telefono:</p>
-                                <p class="mb-0">telefono</p>
+                                <p class="mb-0"><?= $_SESSION['user_data']-> phone_number?></p>
                               </div>
                             </div>
                           </li>
@@ -151,11 +152,11 @@ include "../../config.php";
                             <div class="row">
                               <div class="col-md-6">
                                 <p class="mb-1 text-muted">Email:</p>
-                                <p class="mb-0">Email@example.com</p>
+                                <p class="mb-0"><?= $_SESSION['user_data']-> email?></p>
                               </div>
                               <div class="col-md-6">
                                 <p class="mb-1 text-muted">Rol:</p>
-                                <p class="mb-0">(rol)</p>
+                                <p class="mb-0"><?= $_SESSION['user_data']-> role?></p>
                               </div>
                             </div>
                           </li>
