@@ -1,7 +1,11 @@
 <!doctype html>
 <html lang="en">
 <!-- [Head] start -->
-<?php include "../../config.php" ?>
+<?php include "../../config.php";
+include "../../app/categoriesController.php";
+$categoriesController = new CategoriesController();
+$categories = $categoriesController->get();
+?>
 <?php include "../layouts/head.php" ?>
 
 <!-- [Head] end -->
@@ -80,47 +84,55 @@
 
                   <tbody>
                     <!-- Producto -->
-                    <tr>
-                      <td class="text-end">7</td>
-                      <td>
-                        <div class="row">
-                          <div class="col-auto pe-0">
-                            <img src="../assets/images/application/img-prod-1.jpg" alt="user-image" class="wid-40 rounded" />
-                          </div>
-                          <div class="col">
-                            <h6 class="mb-1">producto</h6>
-                            <p class="text-muted f-12 mb-0">slug</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>Categoria</td>
-                      <td class="text-center">Descripción</td>
-                      <td class="text-center">
-                        <img src="../assets/images/application/img-prod-brand-1.png" alt="user-image" class="wid-40" />
-                        <div class="prod-action-links">
-                          <ul class="list-inline me-auto mb-0">
-                            <!-- Ver producto -->
-                            <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="View">
-                              <a href="#" class="avtar avtar-xs btn-link-secondary btn-pc-default" data-bs-toggle="offcanvas" data-bs-target="#productOffcanvas">
-                                <i class="ti ti-eye f-18"></i>
-                              </a>
-                            </li>
-                            <!-- Editar producto -->
-                            <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="Edit">
-                              <a href="ecom_product-add.html" class="avtar avtar-xs btn-link-success btn-pc-default">
-                                <i class="ti ti-edit-circle f-18"></i>
-                              </a>
-                            </li>
-                            <!-- Eliminar producto -->
-                            <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="Delete">
-                              <a href="#" class="avtar avtar-xs btn-link-danger btn-pc-default">
-                                <i class="ti ti-trash f-18"></i>
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
-                      </td>
-                    </tr>
+                    <?php if (isset($categories) && count($categories)): ?>
+                      <?php foreach ($categories as $category): ?>
+                      <?php foreach ($category->products as $product): ?>
+                        <tr>
+
+                          <td class="text-end"> <?php echo $category -> id ?> </td>
+                          <td>
+                            <div class="row">
+                              <div class="col-auto pe-0">
+                                <img src="<?= $product->cover ?>" alt="image" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=<?php echo urlencode($product->name); ?>';" alt="user-image" class="wid-40 rounded" />
+                              </div>
+                              <div class="col">
+                                <h6 class="mb-1"><?= $product->name ?></h6>
+                                <p class="text-muted f-12 mb-0"><?= $product -> slug?></p>
+                              </div>
+                            </div>
+                          </td>
+                          <td><?= $category -> name?></td>
+                          <td class="text-center"><?= implode(' ', array_slice(explode(' ', $product->description), 0, 3)) . '...' ?></td>
+                          <td class="text-center">
+                            <img src="../assets/images/application/img-prod-brand-1.png" alt="user-image" class="wid-40" />
+                            <div class="prod-action-links">
+                              <ul class="list-inline me-auto mb-0">
+                                <!-- Ver producto -->
+                                <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="View">
+                                  <a href="#" class="avtar avtar-xs btn-link-secondary btn-pc-default" data-bs-toggle="offcanvas" data-bs-target="#productOffcanvas">
+                                    <i class="ti ti-eye f-18"></i>
+                                  </a>
+                                </li>
+                                <!-- Editar producto -->
+                                <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="Edit">
+                                  <a href="ecom_product-add.html" class="avtar avtar-xs btn-link-success btn-pc-default">
+                                    <i class="ti ti-edit-circle f-18"></i>
+                                  </a>
+                                </li>
+                                <!-- Eliminar producto -->
+                                <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="Delete">
+                                  <a href="#" class="avtar avtar-xs btn-link-danger btn-pc-default">
+                                    <i class="ti ti-trash f-18"></i>
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                          </td>
+
+                        </tr>
+                      <?php endforeach; ?>
+                      <?php endforeach;?>
+                    <?php endif; ?>
                   </tbody>
                 </table>
               </div>
@@ -143,7 +155,7 @@
 
   <!-- [Page Specific JS] start -->
   <script src="../assets/js/plugins/simple-datatables.js"></script>
-  
+
   <!-- [Page Specific JS] end -->
 
 
