@@ -49,7 +49,9 @@ $users = $userController->getUser();
                         </div>
                         <div class="col-md-12">
                             <div class="page-header-title">
+                                <br>
                                 <h2 class="mb-0">Carta de usuario</h2>
+                                <br>
                             </div>
                             <br>
                             <button class="btn btn-outline-secondary shadow-sm rounded-pill px-4">Agregar usuario</button>
@@ -70,7 +72,7 @@ $users = $userController->getUser();
                         <div class="col-md-6 col-xl-4">
                             <div class="card user-card shadow-sm">
                                 <div class="card-body">
-                                    <!-- Imagen de portada y calificación -->
+                                    <!-- Imagen de portada y calificaci贸n -->
                                     <div class="position-relative">
                                         <img src="../assets/images/application/img-user-cover-1.jpg" alt="cover-image" class="img-fluid rounded-top" />
                                         <div class="position-absolute bottom-0 start-0 p-2 bg-dark bg-opacity-50 rounded text-white d-inline-flex align-items-center">
@@ -83,15 +85,17 @@ $users = $userController->getUser();
                                         <img src="../assets/images/user/avatar-1.jpg" alt="user-image" class="img-thumbnail rounded-circle border border-3 border-white" style="width: 80px; height: 80px;">
                                         <i class="bg-success position-absolute bottom-0 end-0 border border-white rounded-circle" style="width: 12px; height: 12px;"></i>
                                     </div>
-                                    <!-- Información del usuario -->
+                                    <!-- Informaci贸n del usuario -->
                                     <div class="text-center mt-2">
                                         <h6 class="mb-0"><?php echo $user->name; ?></h6>
                                         <h6 class="mb-0"><?php echo $user->lastname; ?></h6>
                                         <p class="text-muted text-sm mb-1"><a href="#" class="text-primary"><?php echo $user->email; ?></a></p>
                                     </div>
-                                    <!-- Separador e información adicional -->
+                                    <!-- Separador e informaci贸n adicional -->
                                     <div class="border-top border-light my-3 pt-2 text-center">
-                                        <span class="fw-semibold">Información:</span>
+                                        <a href=""></a>
+                                        <button class="btn text-dark border border-dark bg-transparent rounded-pill"> Ver mas informaci贸n...</button>
+
                                     </div>
                                     <div class="text-center mb-3">
                                         <span class="badge bg-light-secondary border rounded-pill border-secondary bg-transparent f-14 me-1 mt-1"><?php echo $user->role; ?></span>
@@ -99,8 +103,8 @@ $users = $userController->getUser();
                                     </div>
                                     <!-- Botones -->
                                     <div class="d-flex justify-content-around">
-                                        <button class="btn btn-outline-secondary shadow-sm rounded-pill px-4">Editar usuario</button>
-                                        <button class="btn btn-outline-secondary shadow-sm rounded-pill px-4">Borrar usuario</button>
+                                        <button class="btn btn-primary shadow-sm rounded-pill px-4">Editar usuario</button>
+                                        <button class="btn shadow-sm btn-danger rounded-pill px-4">Borrar usuario</button>
                                     </div>
                                 </div>
                             </div>
