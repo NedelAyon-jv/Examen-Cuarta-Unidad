@@ -104,7 +104,11 @@ $users = $userController->getUser();
                                     <!-- Botones -->
                                     <div class="d-flex justify-content-around">
                                         <a class="btn btn-primary shadow-sm rounded-pill px-4" href= "<?php echo BASE_PATH . "users/details/" . $user->id; ?>">Editar usuario</a>
-                                        <button class="btn shadow-sm btn-danger rounded-pill px-4">Borrar usuario</button>
+                                        <form action="../../app/userController.php" method="POST" id="deleteUserForm-<?=$user->id ?>" >
+                                            <input type="text" hidden name="action" value="delete_user">
+                                            <input type="hidden" name="id" value="<?= $user->id ?>">
+                                        </form>
+                                        <button class="btn shadow-sm btn-danger rounded-pill px-4 deleteUser" value="<?= $user -> id ?>">Borrar usuario</button>
                                     </div>
                                 </div>
                             </div>
@@ -124,6 +128,39 @@ $users = $userController->getUser();
     <?php include "../layouts/modals.php" ?>
 
     <!-- Required Js -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    let deleteUser = document.querySelectorAll('.deleteUser');
+    deleteUser.forEach(button => {
+        button.addEventListener('click', function () {
+            swal({
+                title: "¿Estás seguro?",
+                text: "¡Una vez eliminado, no podrás recuperar esta información!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    const form = document.getElementById(`deleteUserForm-${button.value}`);
+                    if (form) {
+                        form.submit();
+                        swal("¡La información ha sido eliminada!", {
+                            icon: "success",
+                        });
+                    } else {
+                        console.error(`Formulario con id deleteUserForm-${button.value} no encontrado.`);
+                    }
+                }
+            });
+        });
+    });
+});
+
+
+
+</script>
 </body>
 <!-- [Body] end -->
 
