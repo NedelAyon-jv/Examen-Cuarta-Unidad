@@ -140,7 +140,7 @@ class userController
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'DELETE',
             CURLOPT_HTTPHEADER => array(
-                
+                'Authorization: Bearer ' . $_SESSION['user_data']->token
             ),
         ));
 
