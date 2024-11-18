@@ -54,7 +54,7 @@ $users = $userController->getUser();
                                 <br>
                             </div>
                             <br>
-                            <button class="btn btn-outline-secondary shadow-sm rounded-pill px-4">Agregar usuario</button>
+                            <a class="btn btn-outline-secondary shadow-sm rounded-pill px-4" href= "<?php echo BASE_PATH . "users/create/" ?>">Agregar usuario</a>
 
 
                         </div>
@@ -103,7 +103,7 @@ $users = $userController->getUser();
                                     </div>
                                     <!-- Botones -->
                                     <div class="d-flex justify-content-around">
-                                        <button class="btn btn-primary shadow-sm rounded-pill px-4">Editar usuario</button>
+                                        <a class="btn btn-primary shadow-sm rounded-pill px-4" href= "<?php echo BASE_PATH . "users/details/" . $user->id; ?>">Editar usuario</a>
                                         <button class="btn shadow-sm btn-danger rounded-pill px-4">Borrar usuario</button>
                                     </div>
                                 </div>
