@@ -1,6 +1,6 @@
 <?php
 include "../../config.php";
-include "app/ProductsController.php";
+include "../../app/ProductsController.php";
 
 // Verificar si se proporciona un slug para el producto
 if (!isset($_GET['product_id'])) {

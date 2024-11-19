@@ -80,8 +80,10 @@ if (!is_array($products)) {
                     <div class="col-sm-6 col-xl-4">
                       <div class="card product-card">
                         <div class="card-img-top">
-                          <a href="ecom_product-details.html">
-                            <img src="<?= $product->cover ?>" alt="image" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=<?php echo urlencode($product->name); ?>';" alt="Product Image"class="img-prod img-fluid" style="height: 400px" />
+                          <a href="../../views/products/details.php?slug=<?= urlencode($product->slug) ?>">
+                            <img src="<?= $product->cover ?>" alt="image" 
+                                 onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=<?= urlencode($product->name); ?>';" 
+                                 alt="Product Image" class="img-prod img-fluid" style="height: 400px" />
                           </a>
                           <div class="card-body position-absolute end-0 top-0">
                             <div class="form-check prod-likes">
@@ -91,7 +93,7 @@ if (!is_array($products)) {
                           </div>
                         </div>
                         <div class="card-body">
-                          <a href="ecom_product-details.html">
+                          <a href="../../views/products/details.php?slug=<?= urlencode($product->slug) ?>">
                             <p class="prod-content mb-0 text-muted"><?= $product->name ?? 'Unnamed Product' ?></p>
                           </a>
                           <div class="d-flex align-items-center justify-content-between mt-2 mb-3 flex-wrap gap-1">
@@ -104,17 +106,15 @@ if (!is_array($products)) {
                           <div class="d-flex">
                             <div class="flex-shrink-0">
                               <a
-                                href="#"
-                                class="avtar avtar-s btn-link-secondary btn-prod-card"
-                                data-bs-toggle="offcanvas"
-                                data-bs-target="#productOffcanvas">
+                                href="../../views/products/details.php?slug=<?= urlencode($product->slug) ?>"
+                                class="avtar avtar-s btn-link-secondary btn-prod-card">
                                 <i class="ph-duotone ph-eye f-18"></i>
                               </a>
                             </div>
                             <div class="flex-grow-1 ms-3">
                               <div class="d-grid">
-                                <a href="update.php?product_id=<?= $product->id ?>" class="btn btn-link-secondary btn-prod-card">Editar</a>
-                                <form action="app/ProductsController.php" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
+                                <a href="../../views/products/update.php?product_id=<?= $product->id ?>" class="btn btn-link-secondary btn-prod-card">Editar</a>
+                                <form action="../../app/ProductsController.php" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
                                   <input type="hidden" name="action" value="delete_producto">
                                   <input type="hidden" name="product_id" value="<?= $product->id ?>">
                                   <button type="submit" class="btn btn-link-secondary btn-prod-card">Eliminar</button>

@@ -1,7 +1,18 @@
 <?php 
-
   include "../../config.php";
+  include "../../app/ProductsController.php";
 
+  // Obtener el slug del producto desde la URL
+  $slug = isset($_GET['slug']) ? $_GET['slug'] : null;
+
+  if ($slug) {
+      $productsController = new ProductsController();
+      $product = $productsController->getBySlug($slug);
+  } else {
+      // Redirigir si no hay slug
+      header("Location: ../dashboard/index.html");
+      exit();
+  }
 ?>
 <!doctype html>
 <html lang="en">
@@ -34,19 +45,18 @@
                 <ul class="breadcrumb">
                   <li class="breadcrumb-item"><a href="../dashboard/index.html">Home</a></li>
                   <li class="breadcrumb-item"><a href="javascript: void(0)">E-commerce</a></li>
-                  <li class="breadcrumb-item" aria-current="page">Products</li>
+                  <li class="breadcrumb-item" aria-current="page"><?= $product->name ?? "Producto no encontrado" ?></li>
                 </ul>
               </div>
               <div class="col-md-12">
                 <div class="page-header-title">
-                  <h2 class="mb-0">Products</h2>
+                  <h2 class="mb-0"><?= $product->name ?? "Producto no encontrado" ?></h2>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <!-- [ breadcrumb ] end -->
-
 
         <!-- [ Main Content ] start -->
         <div class="row">
@@ -85,51 +95,28 @@
                             </ul>
                           </div>
                           <div class="carousel-item active">
-                            <img src="<?= BASE_PATH ?>assets/images/application/img-prod-1.jpg" class="d-block w-100" alt="Product images" />
+                            <img src="<?= $product->cover ?>" class="d-block w-100" alt="Imagen del producto" />
                           </div>
-                          
                         </div>
                         <ol class="list-inline carousel-indicators position-relative product-carousel-indicators my-sm-3 mx-0">
                           <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="list-inline-item w-25 h-auto active">
-                            <img src="<?= BASE_PATH ?>assets/images/application/img-prod-1.jpg" class="d-block wid-50 rounded" alt="Product images" />
+                            <img src="<?= $product->cover ?>" class="d-block wid-50 rounded" alt="Imagen del producto" />
                           </li>
-                          
                         </ol>
                       </div>
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <span class="badge bg-success f-14">Status</span>
-                    <h5 class="my-3">Producto</h5>
-                    <h5 class="mt-4 mb-sm-3 mb-2 f-w-500">Informacion</h5>
+                    <span class="badge bg-success f-14"><?= $product->status ?? "Desconocido" ?></span>
+                    <h5 class="my-3"><?= $product->name ?></h5>
+                    <h5 class="mt-4 mb-sm-3 mb-2 f-w-500">Información</h5>
                     <ul>
-                      <li class="mb-2">Descripcion:()</li>
-                      <li class="mb-2">Caracteristicas:()</li>
-                      <li class="mb-2">Palabras claves:()</li>
-                      <li class="mb-2">Marca:()</li>
+                      <li class="mb-2">Descripción: <?= $product->description ?></li>
+                      <li class="mb-2">Características: <?= $product->features ?></li>
+                      <li class="mb-2">Palabras claves: <?= implode(', ', $product->tags ?? []) ?></li>
+                      <li class="mb-2">Marca: <?= $product->brand->name ?? "No especificado" ?></li>
                     </ul>
-                    <div class="mb-3 row">
-                      <label class="col-form-label col-lg-3 col-sm-12">Quantity <span class="text-danger">*</span></label>
-                      <div class="col-lg-6 col-md-12 col-sm-12">
-                        <div class="btn-group btn-group-sm mb-2 border" role="group">
-                          <button type="button" id="decrease" onclick="decreaseValue('number')" class="btn btn-link-secondary"
-                            ><i class="ti ti-minus"></i
-                          ></button>
-                          <input
-                            class="wid-35 text-center border-0 m-0 form-control rounded-0 shadow-none"
-                            type="text"
-                            id="number"
-                            value="0"
-                          />
-                          <button type="button" id="increase" onclick="increaseValue('number')" class="btn btn-link-secondary"
-                            ><i class="ti ti-plus"></i
-                          ></button>
-                        </div>
-                      </div>
-                    </div>
-                    <h3 class="mb-4"
-                      ><b>$299.00</b><span class="mx-2 f-16 text-muted f-w-400 text-decoration-line-through">$399.00</span></h3
-                    >
+                    <h3 class="mb-4"><b>$<?= $product->price ?></b></h3>
                     <div class="row">
                       <div class="col-6">
                         <div class="d-grid">
@@ -150,28 +137,10 @@
               <div class="card-header pb-0">
                 <ul class="nav nav-tabs profile-tabs mb-0" id="myTab" role="tablist">
                   <li class="nav-item">
-                    <a
-                      class="nav-link active"
-                      id="ecomtab-tab-1"
-                      data-bs-toggle="tab"
-                      href="#ecomtab-1"
-                      role="tab"
-                      aria-controls="ecomtab-1"
-                      aria-selected="true"
-                      >Caracteristicas
-                    </a>
+                    <a class="nav-link active" id="ecomtab-tab-1" data-bs-toggle="tab" href="#ecomtab-1" role="tab" aria-controls="ecomtab-1" aria-selected="true">Características</a>
                   </li>
                   <li class="nav-item">
-                    <a
-                      class="nav-link"
-                      id="ecomtab-tab-3"
-                      data-bs-toggle="tab"
-                      href="#ecomtab-3"
-                      role="tab"
-                      aria-controls="ecomtab-3"
-                      aria-selected="true"
-                      >Descripcion
-                    </a>
+                    <a class="nav-link" id="ecomtab-tab-3" data-bs-toggle="tab" href="#ecomtab-3" role="tab" aria-controls="ecomtab-3" aria-selected="true">Descripción</a>
                   </li>
                 </ul>
               </div>
@@ -182,8 +151,8 @@
                       <table class="table table-borderless mb-0">
                         <tbody>
                           <tr>
-                            <td class="text-muted py-1">Caracteristicas:</td>
-                            <td class="py-1">Aqui van las caracteristicas</td>
+                            <td class="text-muted py-1">Características:</td>
+                            <td class="py-1"><?= $product->features ?></td>
                           </tr>  
                         </tbody>
                       </table>
@@ -191,9 +160,7 @@
                   </div>
                   <div class="tab-pane" id="ecomtab-3" role="tabpanel" aria-labelledby="ecomtab-tab-3">
                     <div class="table-responsive">
-                      <p class="text-muted">
-                        Descripcion
-                      </p>
+                      <p class="text-muted"><?= $product->description ?></p>
                     </div>
                   </div>
                 </div>
@@ -208,10 +175,8 @@
     <!-- [ Main Content ] end -->
     
     <?php include "../layouts/footer.php" ?> 
-
     <?php include "../layouts/scripts.php" ?> 
-
     <?php include "../layouts/modals.php" ?>
   </body>
-  <!-- [Body] end -->undefined
+  <!-- [Body] end -->
 </html>
