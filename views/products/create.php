@@ -53,11 +53,11 @@ include "../../app/ProductsController.php";
                                 <div class="mb-3">
                                     <label class="form-label">Marca</label>
                                     <select class="form-select" id="brand_id" name="brand_id" required>
-                                    <option value="" disabled selected>Seleccione una marca</option>
-        <option value="1">Marca Ejemplo 1</option>
-        <option value="2">Marca Ejemplo 2</option>
-        <option value="3">Marca Ejemplo 3</option>
-        <option value="4">Marca Ejemplo 4</option>
+                                        <option value="" disabled selected>Seleccione una marca</option>
+                                        <option value="1">Marca Ejemplo 1</option>
+                                        <option value="2">Marca Ejemplo 2</option>
+                                        <option value="3">Marca Ejemplo 3</option>
+                                        <option value="4">Marca Ejemplo 4</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -88,7 +88,7 @@ include "../../app/ProductsController.php";
                         <div class="card-body">
                             <div class="mb-0">
                                 <p><span class="text-danger">*</span> Tamaño recomendado 800x800</p>
-                                <label class="btn btn-outline-secondary" for="flupld">
+                                <label class="btn btn-outline-secondary" for="cover">
                                     <i class="ti ti-upload me-2"></i> Seleccione una imagen
                                 </label>
                                 <input type="file" id="cover" name="cover" class="d-none" accept="image/*" required />
@@ -100,7 +100,8 @@ include "../../app/ProductsController.php";
                     <div class="card">
                         <div class="card-body text-end btn-page">
                             <button type="submit" class="btn btn-primary mb-0" form="createProductForm">Publicar producto</button>
-                            <button type="button" class="btn btn-outline-secondary mb-0">Cancelar</button>
+                            <button type="button" class="btn btn-outline-secondary mb-0" onclick="window.location.href='../products/index.php'">Cancelar</button>
+
                         </div>
                     </div>
                 </div>
@@ -123,8 +124,12 @@ include "../../app/ProductsController.php";
             try {
                 const response = await fetch('../../app/ProductsController.php', {
                     method: 'POST',
-                    body: formData
+                    body: formData,
                 });
+
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
+                }
 
                 const result = await response.json();
                 const messageElement = document.getElementById('responseMessage');
@@ -141,7 +146,7 @@ include "../../app/ProductsController.php";
                 }
             } catch (error) {
                 console.error('Error:', error);
-                alert('Error al conectar con el servidor.');
+                alert(`Error al conectar con el servidor: ${error.message}`);
             }
         });
     </script>
