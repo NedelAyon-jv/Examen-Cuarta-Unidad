@@ -113,11 +113,10 @@
                     <ul>
                       <li class="mb-2">Descripción: <?= $product->description ?></li>
                       <li class="mb-2">Características: <?= $product->features ?></li>
-                      <li class="mb-2">Palabras claves: <?= implode(', ', $product->tags ?? []) ?></li>
+                      <li class="mb-2">Palabras claves: <?= implode(', ', $product->tags ??  [])  ?></li>
                       <li class="mb-2">Marca: <?= $product->brand->name ?? "No especificado" ?></li>
                     </ul>
-                    <h3 class="mb-4"><b>$<?= $product->price ?></b></h3>
-                    <div class="row">
+                    <h3 class="mb-0 text-truncate"><b>$<?= number_format($product->price ?? 0, 2) ?></b></h3>                    <div class="row">
                       <div class="col-6">
                         <div class="d-grid">
                           <button type="button" class="btn btn-primary">Comprar</button>
