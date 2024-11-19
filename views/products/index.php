@@ -47,10 +47,13 @@ if (!is_array($products)) {
             <div class="col-md-12">
               <div class="page-header-title">
                 <h2 class="mb-0">Products</h2>
+                <br>
+                <a class="btn btn-outline-secondary shadow-sm rounded-pill px-4" >Agregar producto</a>
               </div>
             </div>
           </div>
         </div>
+
       </div>
       <!-- [ breadcrumb ] end -->
 
