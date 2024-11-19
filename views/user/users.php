@@ -94,7 +94,7 @@ $users = $userController->getUser();
                                     <!-- Separador e informaci贸n adicional -->
                                     <div class="border-top border-light my-3 pt-2 text-center">
                                         <a href=""></a>
-                                        <a class="btn text-dark border border-dark bg-transparent rounded-pill" href="<?php echo BASE_PATH . "users/details/" . $user->id; ?>"> Ver mas informaci贸n...</a>
+                                        <a class="btn text-dark border border-dark bg-transparent rounded-pill" href="<?php echo BASE_PATH . "users/details/" . $user->id; ?>"> Ver mas información...</a>
 
                                     </div>
                                     <div class="text-center mb-3">
