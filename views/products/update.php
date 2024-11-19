@@ -3,14 +3,14 @@ include "../../config.php";
 include "../../app/ProductsController.php";
 
 // Verificar si se proporciona un slug para el producto
-if (!isset($_GET['product_id'])) {
+if (!isset($_GET['slug'])) {
     header("Location: ../dashboard/index.html?status=error");
     exit();
 }
 
-$product_id = $_GET['product_id'];
+$slug = $_GET['slug'];
 $productsController = new ProductsController();
-$product = $productsController->getBySlug($product_id);
+$product = $productsController->getBySlug($slug);
 
 if (!$product) {
     header("Location: ../dashboard/index.html?status=not_found");
@@ -55,9 +55,9 @@ if (!$product) {
                 </div>
             </div>
 
-            <form action="app/ProductsController.php" method="POST" enctype="multipart/form-data">
+            <form action="../../app/ProductsController.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="update_producto">
-                <input type="hidden" name="product_id" value="<?= htmlspecialchars($product->id) ?>">
+                <input type="hidden" name="product_id" value="<?= $product->id ?>">
 
                 <div class="row">
                     <div class="col-xl-6">
@@ -68,19 +68,19 @@ if (!$product) {
                             <div class="card-body">
                                 <div class="mb-3">
                                     <label class="form-label">Nombre del producto</label>
-                                    <input type="text" class="form-control" name="name" value="<?= htmlspecialchars($product->name) ?>" required>
+                                    <input type="text" class="form-control" name="name" value="<?= $product->name ?>" required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Slug</label>
-                                    <input type="text" class="form-control" name="slug" value="<?= htmlspecialchars($product->slug) ?>" required>
+                                    <input type="text" class="form-control" name="slug" value="<?= $product->slug ?>" required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Descripción</label>
-                                    <textarea class="form-control" name="description"><?= htmlspecialchars($product->description) ?></textarea>
+                                    <textarea class="form-control" name="description"><?= $product->description ?></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Características</label>
-                                    <textarea class="form-control" name="features"><?= htmlspecialchars($product->features) ?></textarea>
+                                    <textarea class="form-control" name="features"><?= $product->features ?></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Marca</label>
@@ -93,7 +93,7 @@ if (!$product) {
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Palabras claves</label>
-                                    <input type="text" class="form-control" name="keywords" value="<?= htmlspecialchars($product->keywords) ?>">
+                                    <input type="text" class="form-control" name="keywords" value="<?= $product->keywords ?>">
                                 </div>
                             </div>
                         </div>
@@ -111,7 +111,7 @@ if (!$product) {
                                     </label>
                                     <input type="file" id="flupld" name="cover" class="d-none">
                                     <?php if (!empty($product->cover)): ?>
-                                        <img src="<?= htmlspecialchars($product->cover) ?>" alt="Imagen del producto" class="img-thumbnail mt-2" style="max-width: 150px;">
+                                        <img src="<?= $product->cover ?>" alt="Imagen del producto" class="img-thumbnail mt-2" style="max-width: 150px;">
                                     <?php endif; ?>
                                 </div>
                             </div>

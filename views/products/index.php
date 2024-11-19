@@ -48,7 +48,7 @@ if (!is_array($products)) {
               <div class="page-header-title">
                 <h2 class="mb-0">Products</h2>
                 <br>
-                <a class="btn btn-outline-secondary shadow-sm rounded-pill px-4" >Agregar producto</a>
+                <a href="../../views/products/create.php" class="btn btn-outline-secondary shadow-sm rounded-pill px-4">Agregar producto</a>
               </div>
             </div>
           </div>
@@ -116,7 +116,8 @@ if (!is_array($products)) {
                             </div>
                             <div class="flex-grow-1 ms-3">
                               <div class="d-grid">
-                                <a href="../../views/products/update.php?product_id=<?= $product->id ?>" class="btn btn-link-secondary btn-prod-card">Editar</a>
+                              <a href="../../views/products/update.php?slug=<?= urlencode($product->slug) ?>" class="btn btn-link-secondary btn-prod-card">Editar</a>
+
                                 <form action="../../app/ProductsController.php" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
                                   <input type="hidden" name="action" value="delete_producto">
                                   <input type="hidden" name="product_id" value="<?= $product->id ?>">

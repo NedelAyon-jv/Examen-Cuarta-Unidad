@@ -1,33 +1,24 @@
 <?php
 include "../../config.php";
-include "app/ProductsController.php";
+include "../../app/ProductsController.php";
 ?>
 <!doctype html>
 <html lang="en">
-<!-- [Head] start -->
-
 <head>
     <?php include "../layouts/head.php" ?>
 </head>
-<!-- [Head] end -->
-<!-- [Body] Start -->
-
 <body data-pc-preset="preset-1" data-pc-sidebar-theme="light" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme="light">
-    <!-- [ Pre-loader ] start -->
     <div class="loader-bg">
         <div class="loader-track">
             <div class="loader-fill"></div>
         </div>
     </div>
 
-    <!-- [ Pre-loader ] End -->
     <?php include "../layouts/sidebar.php" ?>
     <?php include "../layouts/navbar.php" ?>
 
-    <!-- [ Main Content ] start -->
     <div class="pc-container">
         <div class="pc-content">
-            <!-- [ breadcrumb ] start -->
             <div class="page-header">
                 <div class="page-block">
                     <div class="row align-items-center">
@@ -46,11 +37,8 @@ include "app/ProductsController.php";
                     </div>
                 </div>
             </div>
-            <!-- [ breadcrumb ] end -->
 
-            <!-- [ Main Content ] start -->
             <div class="row">
-                <!-- [ Información del Producto ] start -->
                 <div class="col-xl-6">
                     <div class="card">
                         <div class="card-header">
@@ -62,11 +50,14 @@ include "app/ProductsController.php";
                                     <label class="form-label">Nombre del producto</label>
                                     <input type="text" class="form-control" id="name" name="name" placeholder="nombre del producto" required />
                                 </div>
-
                                 <div class="mb-3">
                                     <label class="form-label">Marca</label>
                                     <select class="form-select" id="brand_id" name="brand_id" required>
-                                        <option>Marcas</option>
+                                    <option value="" disabled selected>Seleccione una marca</option>
+        <option value="1">Marca Ejemplo 1</option>
+        <option value="2">Marca Ejemplo 2</option>
+        <option value="3">Marca Ejemplo 3</option>
+        <option value="4">Marca Ejemplo 4</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -74,22 +65,21 @@ include "app/ProductsController.php";
                                     <input type="text" class="form-control" id="slug" name="slug" placeholder="slug del producto" required />
                                 </div>
                                 <div class="mb-0">
-                                    <label class="form-label">Descripcion del producto</label>
-                                    <textarea class="form-control" id="description" name="description" placeholder="descripcion del producto" required></textarea>
+                                    <label class="form-label">Descripción del producto</label>
+                                    <textarea class="form-control" id="description" name="description" placeholder="descripción del producto" required></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Palabras claves</label>
                                     <input type="text" class="form-control" id="keywords" name="keywords" placeholder="palabras claves (rojo, azul, grande, etc)" />
                                 </div>
                                 <div class="mb-0">
-                                    <label class="form-label">Caracteristicas del producto</label>
-                                    <textarea class="form-control" id="features" name="features" placeholder="caracteristicas" required></textarea>
+                                    <label class="form-label">Características del producto</label>
+                                    <textarea class="form-control" id="features" name="features" placeholder="características" required></textarea>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-                <!-- [ Imagen del Producto ] start -->
                 <div class="col-xl-6">
                     <div class="card">
                         <div class="card-header">
@@ -97,14 +87,15 @@ include "app/ProductsController.php";
                         </div>
                         <div class="card-body">
                             <div class="mb-0">
-                                <p><span class="text-danger">*</span> Tamaño recomendado 800x800 </p>
-                                <label class="btn btn-outline-secondary" for="flupld"><i class="ti ti-upload me-2"></i> Seleccione una imagen</label>
-                                <input type="file" id="cover" name="cover" class="d-none" accept="image/*" />
+                                <p><span class="text-danger">*</span> Tamaño recomendado 800x800</p>
+                                <label class="btn btn-outline-secondary" for="flupld">
+                                    <i class="ti ti-upload me-2"></i> Seleccione una imagen
+                                </label>
+                                <input type="file" id="cover" name="cover" class="d-none" accept="image/*" required />
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- [ Botones ] start -->
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-body text-end btn-page">
@@ -113,7 +104,7 @@ include "app/ProductsController.php";
                         </div>
                     </div>
                 </div>
-                <!-- [ Main Content ] end -->
+                <div id="responseMessage" class="d-none"></div>
             </div>
         </div>
     </div>
@@ -122,7 +113,6 @@ include "app/ProductsController.php";
     <?php include "../layouts/scripts.php" ?>
     <?php include "../layouts/modals.php" ?>
 
-    <!-- [ Script para enviar el formulario ] -->
     <script>
         document.getElementById('createProductForm').addEventListener('submit', async function(event) {
             event.preventDefault();
@@ -131,7 +121,7 @@ include "app/ProductsController.php";
             formData.append('action', 'crear_producto');
 
             try {
-                const response = await fetch('app/ProductsController.php', {
+                const response = await fetch('../../app/ProductsController.php', {
                     method: 'POST',
                     body: formData
                 });
@@ -140,22 +130,20 @@ include "app/ProductsController.php";
                 const messageElement = document.getElementById('responseMessage');
 
                 if (result.code > 0) {
-                 messageElement.textContent = 'Producto creado exitosamente.';
-                 messageElement.className = 'alert alert-success';
-                 messageElement.classList.remove('d-none');
-                 this.reset();
-                 } else {
-                     messageElement.textContent = 'Error al crear el producto.';
-                     messageElement.className = 'alert alert-danger';
-                     messageElement.classList.remove('d-none');
-                    }
+                    messageElement.textContent = 'Producto creado exitosamente.';
+                    messageElement.className = 'alert alert-success';
+                    messageElement.classList.remove('d-none');
+                    this.reset();
+                } else {
+                    messageElement.textContent = result.message || 'Error al crear el producto.';
+                    messageElement.className = 'alert alert-danger';
+                    messageElement.classList.remove('d-none');
+                }
             } catch (error) {
                 console.error('Error:', error);
                 alert('Error al conectar con el servidor.');
             }
         });
     </script>
-
 </body>
-<!-- [Body] end -->
 </html>

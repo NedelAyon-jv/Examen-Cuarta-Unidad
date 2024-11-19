@@ -111,9 +111,9 @@
                     <h5 class="my-3"><?= $product->name ?></h5>
                     <h5 class="mt-4 mb-sm-3 mb-2 f-w-500">Información</h5>
                     <ul>
-                      <li class="mb-2">Descripción: <?= $product->description ?></li>
-                      <li class="mb-2">Características: <?= $product->features ?></li>
-                      <li class="mb-2">Palabras claves: <?= implode(', ', $product->tags ??  [])  ?></li>
+                      <li class="mb-2">Descripción: <?= $product->description ?? 'No especificada' ?></li>
+                      <li class="mb-2">Características: <?= $product->features ?? 'No especificada' ?></li>
+                      <li class="mb-2">Palabras claves: <?= implode(', ', $product->tags ?? []) ?? 'No especificada' ?></li>
                       <li class="mb-2">Marca: <?= $product->brand->name ?? "No especificado" ?></li>
                     </ul>
                     <h3 class="mb-0 text-truncate"><b>$<?= number_format($product->price ?? 0, 2) ?></b></h3>                    <div class="row">
