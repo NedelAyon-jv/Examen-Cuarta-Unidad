@@ -36,7 +36,7 @@
         <div class="pc-content">
             <div class="row w-100 g-4">
 
-                <div class="col-md-6">
+                <div class="col-sm-12">
                     <div class="card shadow-sm mb-4">
                         <div class="card-body text-center p-4">
                             <img class="rounded-circle img-fluid wid-90 mb-3"
@@ -50,51 +50,6 @@
                         </div>
                     </div>
                 </div>
-
-
-                <div class="col-md-6">
-                    <div class="card shadow-sm mb-4">
-                        <div class="card-header bg-light">
-                            <h5 class="mb-0">Nivel y Órdenes</h5>
-                        </div>
-                        <div class="card-body text-start p-4">
-                            <p><strong>Nivel:</strong> Nivel del Usuario</p>
-                            <p><strong>Órdenes:</strong></p>
-                            <ul class="list-group">
-                                <li class="list-group-item">Orden #1 - Estado</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-6">
-                    <div class="card shadow-sm mb-4">
-                        <div class="card-header bg-light">
-                            <h5 class="mb-0">Widgets Totales de Compras</h5>
-                        </div>
-                        <div class="card-body text-center p-4">
-                            <h1 class="display-4 mb-3">Total de Widgets</h1>
-                            <p class="text-muted">Total de Widgets Comprados</p>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-6">
-                    <div class="card shadow-sm mb-4">
-                        <div class="card-header bg-light">
-                            <h5 class="mb-0">Direcciones Registradas</h5>
-                        </div>
-                        <div class="card-body p-4">
-                            <ul class="list-group">
-                                <li class="list-group-item">Dirección 1, Ciudad, País</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-
                 <div class=" row">
                     <!-- [ sample-page ] start -->
                     <div class="col-sm-12">
@@ -154,6 +109,37 @@
                         <!-- [ sample-page ] end -->
                     </div>
                 </div>
+
+                <div class="col-md-6">
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-light">
+                            <h5 class="mb-0">Nivel y Órdenes</h5>
+                        </div>
+                        <div class="card-body text-start p-4">
+                            <p><strong>Nivel:</strong> Nivel del Usuario</p>
+                            <p><strong>Órdenes:</strong></p>
+                            <ul class="list-group">
+                                <li class="list-group-item">Orden #1 - Estado</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-light">
+                            <h5 class="mb-0">Widgets Totales de Compras</h5>
+                        </div>
+                        <div class="card-body text-center p-4">
+                            <h1 class="display-4 mb-3">Total de Widgets</h1>
+                            <p class="text-muted">Total de Widgets Comprados</p>
+                        </div>
+                    </div>
+                </div>
+
+
+              
             </div>
         </div>
 

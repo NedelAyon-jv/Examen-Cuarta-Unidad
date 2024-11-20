@@ -17,6 +17,6 @@ RewriteRule ^catalogo/categorias/?$ views/catalogo/categorias.php
 RewriteRule ^catalogo/etiquetas/?$ views/catalogo/etiquetas.php
 RewriteRule ^catalogo/marcas/?$ views/catalogo/marcas.php
 RewriteRule ^clientes/?$ views/clientes/clientes.php
-RewriteRule ^clientes/details/?$ views/clientes/details_c.php
+RewriteRule ^clientes/details/([^/]+)?$ views/clientes/details_c.php?id=$1 [L]
 RewriteRule ^clientes/create/?$ views/clientes/create_c.php
 RewriteRule ^clientes/update/?$ views/clientes/update_c.php
