@@ -13,7 +13,6 @@ $client = $clientController->getCliente($_GET['id']);
 
 <head>
     <?php
-    include "../../config.php";
     include "../layouts/head.php";
     ?>
 </head>
@@ -50,10 +49,10 @@ $client = $clientController->getCliente($_GET['id']);
                             <p class="text-muted mb-2"><?= $client->email ?></p>
                             <p><strong>Teléfono:</strong> <?= $client->phone_number ?></p>
                             <p><strong>Membresia:</strong> <?php
-                            echo isset($client->is_suscribed)
-                                ? ($client->is_suscribed == 0 ? "No hay suscripción" : ($client->is_suscribed == 1 ? "Mensual" : ($client->is_suscribed == 2 ? "Anual" : "Desconocido")))
-                                : "No hay suscripción";
-                            ?></p>
+                                                            echo isset($client->is_suscribed)
+                                                                ? ($client->is_suscribed == 0 ? "No hay suscripción" : ($client->is_suscribed == 1 ? "Mensual" : ($client->is_suscribed == 2 ? "Anual" : "Desconocido")))
+                                                                : "No hay suscripción";
+                                                            ?></p>
                         </div>
                     </div>
                 </div>
@@ -131,43 +130,44 @@ $client = $clientController->getCliente($_GET['id']);
                         </div>
                         <div class="card-body text-start p-4">
                             <p><strong>Nivel:</strong><?php
-                            echo isset($client->level->name) && !empty($client->level->name)
-                                ? $client->level->name
-                                : "No se encontró";
-                            ?></p>
+                                                        echo isset($client->level->name) && !empty($client->level->name)
+                                                            ? $client->level->name
+                                                            : "No se encontró";
+                                                        ?></p>
                             <p><strong>Órdenes:</strong></p>
                             <?php if (isset($client->orders) && count($client->orders)): ?>
                                 <?php foreach ($client->orders as $order): ?>
                                     <ul class="list-group">
-                                        
-                                        <strong> Folio: </strong><?= htmlspecialchars($order->folio) ?><br>
-                                        <strong> Total: </strong>$<?= number_format($order->total, 2) ?><br>
-                                        <strong> Estado: </strong><?php
-                                        switch ($order->order_status_id) {
-                                            case 1:
-                                                echo "Pendiente de pago";
-                                                break;
-                                            case 2:
-                                                echo "Pagada";
-                                                break;
-                                            case 3:
-                                                echo "Enviada";
-                                                break;
-                                            case 4:
-                                                echo "Abandonada";
-                                                break;
-                                            case 5:
-                                                echo "Pendiente de enviar";
-                                                break;
-                                            case 6:
-                                                echo "Cancelada";
-                                                break;
-                                            default:
-                                                echo "Estado desconocido";
-                                                break;
-                                        }
-                                        ?>
-                                        
+                                        <li class="list-group-item">
+                                        <li class="list-group-item"><strong> Folio: </strong><?= htmlspecialchars($order->folio) ?><br>
+                                            <strong> Total: </strong>$<?= number_format($order->total, 2) ?><br>
+                                            <strong> Estado: </strong><?php
+                                                                        switch ($order->order_status_id) {
+                                                                            case 1:
+                                                                                echo "Pendiente de pago";
+                                                                                break;
+                                                                            case 2:
+                                                                                echo "Pagada";
+                                                                                break;
+                                                                            case 3:
+                                                                                echo "Enviada";
+                                                                                break;
+                                                                            case 4:
+                                                                                echo "Abandonada";
+                                                                                break;
+                                                                            case 5:
+                                                                                echo "Pendiente de enviar";
+                                                                                break;
+                                                                            case 6:
+                                                                                echo "Cancelada";
+                                                                                break;
+                                                                            default:
+                                                                                echo "Estado desconocido";
+                                                                                break;
+                                                                        }
+                                                                        ?>
+
+                                        </li>
                                     </ul>
                                 <?php endforeach; ?>
                             <?php else: ?>

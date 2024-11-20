@@ -121,7 +121,7 @@ $clients = $clientController->getClientes();
                                                         <ul class="list-inline me-auto mb-0">
                                                             <!-- Ver producto -->
                                                             <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="View">
-                                                                <a href="<?php echo BASE_PATH . "clientes/details/" . $client->id; ?>" class="avtar avtar-xs btn-link-secondary btn-pc-default" data-bs-toggle="offcanvas" data-bs-target="#productOffcanvas">
+                                                                <a href="<?php echo BASE_PATH . "clientes/details/" . $client->id; ?>" class="avtar avtar-xs btn-link-secondary btn-pc-default">
                                                                     <i class="ti ti-eye f-18"></i>
                                                                 </a>
                                                             </li>
