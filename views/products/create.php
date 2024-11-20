@@ -60,10 +60,6 @@ include "../../app/ProductsController.php";
                                         <option value="4">Marca Ejemplo 4</option>
                                     </select>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Slug</label>
-                                    <input type="text" class="form-control" id="slug" name="slug" placeholder="slug del producto" required />
-                                </div>
                                 <div class="mb-0">
                                     <label class="form-label">Descripción del producto</label>
                                     <textarea class="form-control" id="description" name="description" placeholder="descripción del producto" required></textarea>
