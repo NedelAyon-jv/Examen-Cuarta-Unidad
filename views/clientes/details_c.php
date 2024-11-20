@@ -119,7 +119,9 @@
                             <p><strong>Nivel:</strong> Nivel del Usuario</p>
                             <p><strong>Órdenes:</strong></p>
                             <ul class="list-group">
-                                <li class="list-group-item">Orden #1 - Estado</li>
+                               <strong> Folio: </strong>
+                               <strong> Total: </strong>
+                               <strong> Estado: </strong>
                             </ul>
                         </div>
                     </div>
