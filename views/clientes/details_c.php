@@ -2,6 +2,14 @@
 <html lang="en">
 
 <!-- [Head] -->
+<?php
+
+include "../../config.php";
+include "../../app/clientController.php";
+$clientController = new clientController();
+$client = $clientController->getCliente($_GET['id']);
+
+?>
 
 <head>
     <?php
@@ -12,10 +20,7 @@
 
 <!-- [Body] -->
 
-<body data-pc-preset="preset-1"
-    data-pc-sidebar-theme="light"
-    data-pc-sidebar-caption="true"
-    data-pc-direction="ltr"
+<body data-pc-preset="preset-1" data-pc-sidebar-theme="light" data-pc-sidebar-caption="true" data-pc-direction="ltr"
     data-pc-theme="light">
 
     <!-- [Pre-loader] -->
@@ -39,14 +44,16 @@
                 <div class="col-sm-12">
                     <div class="card shadow-sm mb-4">
                         <div class="card-body text-center p-4">
-                            <img class="rounded-circle img-fluid wid-90 mb-3"
-                                src="URL_DE_AVATAR"
-                                alt="Avatar"
-                                onerror="this.onerror=null; this.src='URL_GENERICA';" />
-                            <h3 class="mb-2">Nombre Completo</h3>
-                            <p class="text-muted mb-2">Correo Electrónico</p>
-                            <p><strong>Teléfono:</strong> Número de Teléfono</p>
-                            <p><strong>Membresia:</strong> Tipo de membresia</p>
+                            <img class="rounded-circle img-fluid wid-90 mb-3" src="<?= $client->avatar ?>" alt="Avatar"
+                                onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=<?php echo urlencode($client->name); ?>&size=256&background=random&color=fff';" />
+                            <h3 class="mb-2"><?= $client->name ?></h3>
+                            <p class="text-muted mb-2"><?= $client->email ?></p>
+                            <p><strong>Teléfono:</strong> <?= $client->phone_number ?></p>
+                            <p><strong>Membresia:</strong> <?php
+                            echo isset($client->is_suscribed)
+                                ? ($client->is_suscribed == 0 ? "No hay suscripción" : ($client->is_suscribed == 1 ? "Mensual" : ($client->is_suscribed == 2 ? "Anual" : "Desconocido")))
+                                : "No hay suscripción";
+                            ?></p>
                         </div>
                     </div>
                 </div>
@@ -81,25 +88,32 @@
                                             </thead>
 
                                             <tbody>
-                                                <!-- Producto -->
-                                                <tr>
-                                                    <td class="text-end">7</td>
-                                                    <td>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <h6 class="mb-1 text-center"> Calle y Numero</h6>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">Código Postal</td>
-                                                    <td class="text-center">Ciudad</td>
-                                                    
-                                                    <td class="text-center">
-                                                        Estado
-                                                        
-                                                    </td>
-                                                    </td>
-                                                </tr>
+                                                <?php if (isset($client->addresses) && count($client->addresses)): ?>
+                                                    <?php foreach ($client->addresses as $address): ?>
+                                                        <!-- Producto -->
+                                                        <tr>
+                                                            <td class="text-end">7</td>
+                                                            <td>
+                                                                <div class="row">
+                                                                    <div class="col">
+                                                                        <h6 class="mb-1 text-center">
+                                                                            <?= htmlspecialchars($address->street_and_use_number) ?>
+                                                                        </h6>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <?= htmlspecialchars($address->postal_code) ?></td>
+                                                            <td class="text-center"><?= htmlspecialchars($address->city) ?></td>
+
+                                                            <td class="text-center">
+                                                                <?= htmlspecialchars($address->province) ?>
+
+                                                            </td>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -116,13 +130,49 @@
                             <h5 class="mb-0">Nivel y Órdenes</h5>
                         </div>
                         <div class="card-body text-start p-4">
-                            <p><strong>Nivel:</strong> Nivel del Usuario</p>
+                            <p><strong>Nivel:</strong><?php
+                            echo isset($client->level->name) && !empty($client->level->name)
+                                ? $client->level->name
+                                : "No se encontró";
+                            ?></p>
                             <p><strong>Órdenes:</strong></p>
-                            <ul class="list-group">
-                               <strong> Folio: </strong>
-                               <strong> Total: </strong>
-                               <strong> Estado: </strong>
-                            </ul>
+                            <?php if (isset($client->orders) && count($client->orders)): ?>
+                                <?php foreach ($client->orders as $order): ?>
+                                    <ul class="list-group">
+                                        
+                                        <strong> Folio: </strong><?= htmlspecialchars($order->folio) ?><br>
+                                        <strong> Total: </strong>$<?= number_format($order->total, 2) ?><br>
+                                        <strong> Estado: </strong><?php
+                                        switch ($order->order_status_id) {
+                                            case 1:
+                                                echo "Pendiente de pago";
+                                                break;
+                                            case 2:
+                                                echo "Pagada";
+                                                break;
+                                            case 3:
+                                                echo "Enviada";
+                                                break;
+                                            case 4:
+                                                echo "Abandonada";
+                                                break;
+                                            case 5:
+                                                echo "Pendiente de enviar";
+                                                break;
+                                            case 6:
+                                                echo "Cancelada";
+                                                break;
+                                            default:
+                                                echo "Estado desconocido";
+                                                break;
+                                        }
+                                        ?>
+                                        
+                                    </ul>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <p>No se encontraron órdenes.</p>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -141,7 +191,7 @@
                 </div>
 
 
-              
+
             </div>
         </div>
 

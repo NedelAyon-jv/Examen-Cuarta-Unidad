@@ -1,7 +1,11 @@
 <!doctype html>
 <html lang="en">
 <!-- [Head] start -->
-<?php include "../../config.php" ?>
+<?php include "../../config.php"; 
+include "../../app/clientController.php";
+$clientController = new clientController();
+$clients = $clientController->getClientes();
+?>
 <?php include "../layouts/head.php" ?>
 
 <!-- [Head] end -->
@@ -81,26 +85,43 @@
                                         </thead>
 
                                         <tbody>
+
                                             <!-- Producto -->
                                             <tr>
-                                                <td class="text-end">7</td>
+                                                <?php if (isset($clients) && count($clients)): ?>
+                                                    <?php foreach ($clients as $client): ?>
+                                                <td class="text-end"><?php echo $client->id ?></td>
                                                 <td>
                                                     <div class="row">
                                                         <div class="col">
-                                                            <h6 class="mb-1 text-center"> Nombre del cliente</h6>
-                                                            <p class="text-muted f-12 mb-0 text-center">Numero de telefono</p>
+                                                            <h6 class="mb-1 text-center"> 
+                                                                <?php
+                                                                        echo isset($client->name) && !empty($client->name)
+                                                                            ? $client->name
+                                                                                : "Nombre desconocido";
+                                                                ?></h6>
+                                                            <p class="text-muted f-12 mb-0 text-center"><?php echo $client->phone_number ?></p>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="text-center">Nivel/Membresia</td>
-                                                <td class="text-center">Email</td>
                                                 <td class="text-center">
-                                                    Suscripción
+                                                        <?php
+                                                            echo isset($client->level->name) && !empty($client->level->name)
+                                                                ? $client->level->name
+                                                                : "No se encontró";
+                                                        ?></td>
+                                                <td class="text-center"><?php echo $client->email ?></td>
+                                                <td class="text-center">
+                                                        <?php
+                                                            echo isset($client->is_suscribed)
+                                                                ? ($client->is_suscribed == 0 ? "No hay suscripción" : ($client->is_suscribed == 1 ? "Mensual" : ($client->is_suscribed == 2 ? "Anual" : "Desconocido")))
+                                                                : "No hay suscripción";
+                                                        ?>
                                                     <div class="prod-action-links">
                                                         <ul class="list-inline me-auto mb-0">
                                                             <!-- Ver producto -->
                                                             <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="View">
-                                                                <a href="#" class="avtar avtar-xs btn-link-secondary btn-pc-default" data-bs-toggle="offcanvas" data-bs-target="#productOffcanvas">
+                                                                <a href="<?php echo BASE_PATH . "clientes/details/" . $client->id; ?>" class="avtar avtar-xs btn-link-secondary btn-pc-default" data-bs-toggle="offcanvas" data-bs-target="#productOffcanvas">
                                                                     <i class="ti ti-eye f-18"></i>
                                                                 </a>
                                                             </li>
@@ -121,6 +142,8 @@
                                                 </td>
                                                 </td>
                                             </tr>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
                                         </tbody>
                                     </table>
                                 </div>
