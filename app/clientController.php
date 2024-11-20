@@ -132,7 +132,7 @@ class clientController
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://crud.jonathansoto.mx/api/clients/11',
+            CURLOPT_URL => 'https://crud.jonathansoto.mx/api/clients/' . $id_cliente,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -222,5 +222,14 @@ class clientController
 
             return [];
         }
+    }
+
+    public function getSuscripciones()
+    {
+        return [
+            ['id' => 0, 'name' => 'Sin suscripción'],
+            ['id' => 1, 'name' => 'Mensual'],
+            ['id' => 2, 'name' => 'Anual']
+        ];
     }
 }
