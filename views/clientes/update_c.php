@@ -43,12 +43,12 @@ $userController = new userController();
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="../dashboard/index.html">Home</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0)">Forms</a></li>
-                                <li class="breadcrumb-item" aria-current="page">Registro de clientes</li>
+                                <li class="breadcrumb-item" aria-current="page">Modificar clientes</li>
                             </ul>
                         </div>
                         <div class="col-md-12">
                             <div class="page-header-title">
-                                <h2 class="mb-0">Registro de clientes</h2>
+                                <h2 class="mb-0">Modificar clientes</h2>
                             </div>
                         </div>
                     </div>
@@ -79,12 +79,13 @@ $userController = new userController();
                                         <input type="email" class="form-control" placeholder="Ingresar tu Correo Electrónico " name="email" />
                                         <small class="form-text text-muted">Ingresar tu Correo Electrónico</small>
                                     </div>
-                                    
+
                                 </div>
+
 
                                 <!-- Correo electrónico -->
                                 <div class="row mb-3">
-                                <label class="col-lg-2 col-form-label">Contraseña:</label>
+                                    <label class="col-lg-2 col-form-label">Contraseña:</label>
                                     <div class="col-lg-4">
                                         <div class="input-group">
                                             <input type="password" class="form-control" placeholder="Ingresar tu Contraseña " name="password" />
@@ -124,7 +125,7 @@ $userController = new userController();
 
                                 <!-- Botones -->
                                 <div class="d-flex justify-content-end mt-4">
-                                    <button type="submit" class="btn btn-primary me-2">Crear cliente</button>
+                                    <button type="submit" class="btn btn-primary me-2">Modificar cliente</button>
                                     <button type="reset" class="btn btn-secondary">Cancelar</button>
                                     <input hidden name="action" value="add_user" />
                                 </div>
