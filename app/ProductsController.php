@@ -143,7 +143,7 @@ class ProductsController
                 'cover' => $image_var == '' ? null : new CURLFile($image_var)
             ),
             CURLOPT_HTTPHEADER => array(
-                'Authorization: Bearer 168|39bRzkQImit5EhZa9ZavW7C1K9XufY1LalEUbmld'
+                'Authorization: Bearer '.$_SESSION['user_data']->token
             ),
         ));
 
