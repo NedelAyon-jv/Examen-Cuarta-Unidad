@@ -1,4 +1,8 @@
 <!-- [ Sidebar Menu ] start -->
+<?php  
+
+
+?>
 <nav class="pc-sidebar">
   <div class="navbar-wrapper">
     <div class="m-header">
@@ -15,7 +19,7 @@
           <i class="ph-duotone ph-chart-pie"></i>
         </li>
         <li class="pc-item">
-          <a href="../widget/w_products.html" class="pc-link">
+          <a href="<?php echo BASE_PATH . "products/" ?>" class="pc-link">
             <span class="pc-micon">
               <i class="ph-duotone ph-layout"></i>
             </span>
@@ -25,7 +29,7 @@
           </a>
         </li>
         <li class="pc-item">
-          <a href="../widget/w_user.html" class="pc-link">
+          <a href="<?php echo BASE_PATH . "users/" ?>" class="pc-link">
             <span class="pc-micon">
               <i class="ph-duotone ph-identification-card"></i>
             </span>
@@ -33,11 +37,11 @@
           </a>
         </li>
         <li class="pc-item">
-          <a href="../widget/w_data.html" class="pc-link">
+          <a href="<?php echo BASE_PATH . "clientes/" ?>" class="pc-link">
             <span class="pc-micon">
               <i class="ph-duotone ph-identification-badge"></i>
             </span>
-            <span class="pc-mtext">Clientes</span>
+            <span class="pc-mtext" >Clientes</span>
           </a>
         </li>
         <li class="pc-item pc-hasmenu">
@@ -48,20 +52,20 @@
             <span class="pc-mtext">Catalogos</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span
           ></a>
           <ul class="pc-submenu">
-            <li class="pc-item"><a class="pc-link" href="../application/ecom_product.html">Categorias</a></li>
-            <li class="pc-item"><a class="pc-link" href="../application/ecom_product-details.html">Marcas</a></li>
-            <li class="pc-item"><a class="pc-link" href="../application/ecom_product-list.html">Etiquetas</a></li>
+            <li class="pc-item"><a class="pc-link" href="<?php echo BASE_PATH . "catalogo/categorias/" ?>">Categorias</a></li>
+            <li class="pc-item"><a class="pc-link" href="<?php echo BASE_PATH . "catalogo/marcas/" ?>">Marcas</a></li>
+            <li class="pc-item"><a class="pc-link" href="<?php echo BASE_PATH . "catalogo/etiquetas/" ?>">Etiquetas</a></li>
           </ul>
         </li>
         <li class="pc-item">
-          <a href="../widget/w_chart.html" class="pc-link">
+          <a href="<?php echo BASE_PATH . "cupones/" ?>" class="pc-link">
             <span class="pc-micon">
               <i class="ph-duotone ph-currency-circle-dollar"></i>
             </span>
             <span class="pc-mtext">Cupones</span></a>
         </li>
         <li class="pc-item">
-          <a href="../widget/w_chart.html" class="pc-link">
+          <a href="<?php echo BASE_PATH . "ordenes/" ?>" class="pc-link">
             <span class="pc-micon">
               <i class="ph-duotone ph-newspaper"></i>
             </span>
@@ -69,7 +73,7 @@
         </li>
 
         <li class="pc-item">
-          <a href="../widget/w_products.html" class="pc-link">
+          <a href="<?php echo BASE_PATH . "profile/" ?>" class="pc-link">
             <span class="pc-micon">
               <i class="ph-duotone ph-user-circle"></i>
             </span>
@@ -99,8 +103,8 @@
               <a href="#" class="arrow-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="0,20">
                 <div class="d-flex align-items-center">
                   <div class="flex-grow-1 me-2">
-                    <h6 class="mb-0">Usuario</h6>
-                    <small>Administrator</small>
+                    <h6 class="mb-0"><?= $_SESSION['user_data']-> name?></h6>
+                    <small><?= $_SESSION['user_data']-> email?></small>
                   </div>
                   <div class="flex-shrink-0">
                     <div class="btn btn-icon btn-link-secondary avtar">
