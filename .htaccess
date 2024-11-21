@@ -20,4 +20,7 @@ RewriteRule ^clientes/?$ views/clientes/clientes.php
 RewriteRule ^clientes/details/([^/]+)?$ views/clientes/details_c.php?id=$1 [L]
 RewriteRule ^clientes/create/?$ views/clientes/create_c.php
 RewriteRule ^clientes/update/([^/]+)?$ views/clientes/update_c.php?id=$1 [L]
-
+RewriteRule ^cupones/?$ views/cupones/cupones.php
+RewriteRule ^cupones/details/([^/]+)?$ views/cupones/details_cu.php?id=$1 [L]
+RewriteRule ^cupones/create/?$ views/cupones/create_cu.php
+RewriteRule ^cupones/update/([^/]+)?$ views/cupones/update_cu.php?id=$1 [L]
