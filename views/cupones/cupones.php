@@ -60,9 +60,11 @@ include "../../config.php";
 
 
             <!-- [ Main Content ] start -->
+
+
             <div class="container my-5">
-                <div class="row justify-content-center">
-                    <div class="col-md-6 col-xxl-4">
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
                         <div class="card shadow border-0">
                             <div class="card-header bg-primary text-white text-center">
                                 <h4 class="mb-0">Nombre del Plan</h4>
