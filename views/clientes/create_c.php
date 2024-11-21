@@ -3,8 +3,13 @@
 <!-- [Head] start -->
 <?php
 include "../../config.php";
-include_once "../../app/userController.php";
-$userController = new userController();
+include_once "../../app/clientController.php";
+include_once "../../app/levelsController.php";
+$clientController = new clientController();
+$levelsController = new LevelsController();
+$subscriptions = $clientController->getSuscripciones();
+// Obtener los niveles
+$levels = $levelsController->get();
 ?>
 
 <head>
@@ -66,7 +71,7 @@ $userController = new userController();
                             <h5>Llena cada uno de los campos con lo que se te indica:</h5>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="../../app/userController.php" enctype="multipart/form-data">
+                            <form method="POST" action="../../app/clientController.php">
                                 <!-- Nombre(s) y Apellido(s) -->
                                 <div class="row mb-3">
                                     <label class="col-lg-2 col-form-label">Nombre(s):</label>
@@ -104,10 +109,12 @@ $userController = new userController();
                                 <div class="row mb-3">
                                     <label class="col-lg-2 col-form-label">Suscripción:</label>
                                     <div class="col-lg-4">
-                                        <select class="form-control" name="is_subscribed">
-                                            <option value="0">Sin suscripción</option>
-                                            <option value="1">Mensual</option>
-                                            <option value="2">Anual</option>
+                                        <select class="form-control" name="is_suscribed">
+                                        <?php foreach ($subscriptions as $subscription): ?>
+                                                <option value="<?php echo htmlspecialchars($subscription['id']); ?>">
+                                                    <?php echo htmlspecialchars($subscription['name']); ?>
+                                                </option>
+                                            <?php endforeach; ?>     
                                         </select>
                                         <small class="form-text text-muted">Seleccione su suscripción</small>
                                     </div>
@@ -115,7 +122,12 @@ $userController = new userController();
                                     <label class="col-lg-2 col-form-label">Nivel de cliente:</label>
                                     <div class="col-lg-4">
                                         <select class="form-control" name="level_id">
-                                            <option value="1">Niveles</option>
+                                        <option value="0">No cuenta con nivel de cliente</option>
+                                            <?php foreach ($levels as $level): ?>
+                                                <option value="<?php echo htmlspecialchars($level->id); ?>">
+                                                    <?php echo htmlspecialchars($level->name); ?>
+                                                </option>
+                                            <?php endforeach; ?>
                                         </select>
                                         <small class="form-text text-muted">Seleccione su nivel de cliente</small>
                                     </div>
@@ -126,7 +138,7 @@ $userController = new userController();
                                 <div class="d-flex justify-content-end mt-4">
                                     <button type="submit" class="btn btn-primary me-2">Crear cliente</button>
                                     <button type="reset" class="btn btn-secondary">Cancelar</button>
-                                    <input hidden name="action" value="add_user" />
+                                    <input hidden name="action" value="add_cliente" />
                                 </div>
                             </form>
                         </div>

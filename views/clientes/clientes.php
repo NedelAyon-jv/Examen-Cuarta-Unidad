@@ -50,7 +50,7 @@ $clients = $clientController->getClientes();
             </div>
             <!-- [ breadcrumb ] end -->
 
-            <a class="btn btn-outline-secondary shadow-sm rounded-pill px-4" ">Agregar cliente</a>
+            <a class="btn btn-outline-secondary shadow-sm rounded-pill px-4" href="<?php echo BASE_PATH . "clientes/create/" ?>">Agregar cliente</a>
         <br>
         <br>
       <!-- [ Main Content ] start -->
@@ -126,16 +126,30 @@ $clients = $clientController->getClientes();
                                                                 </a>
                                                             </li>
                                                             <!-- Editar producto -->
+
                                                             <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="Edit">
-                                                                <a href="ecom_product-add.html" class="avtar avtar-xs btn-link-success btn-pc-default">
+                                                                <a href="<?php echo BASE_PATH . "clientes/update/" . $client->id; ?>" class="avtar avtar-xs btn-link-success btn-pc-default"
+                                                                    data-name="<?= $client->name ?>"
+                                                                    data-lastname="<?= $client->lastname ?>"
+                                                                    data-email="<?= $client->email ?>"
+                                                                    data-phone_number="<?= $client->phone_number ?>"
+                                                                    data-password="<?= $client->password ?>"
+                                                                    data-suscribed="<?= $client->is_suscribed ?>"
+                                                                    data-level_id="<?= $client->level_id ?>">
+                                                                >
                                                                     <i class="ti ti-edit-circle f-18"></i>
+
                                                                 </a>
                                                             </li>
                                                             <!-- Eliminar producto -->
+                                                            <form action="../../app/clientController.php" method="POST" id="deleteClientForm-<?= $client->id ?>">
+                                                                        <input type="text" hidden name="action" value="delete_cliente">
+                                                                        <input type="hidden" name="id" value="<?= $client->id ?>">
+                                                                    </form>
                                                             <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="Delete">
-                                                                <a href="#" class="avtar avtar-xs btn-link-danger btn-pc-default">
+                                                                <button value="<?= $client->id ?>" class="avtar avtar-xs btn-link-danger btn-pc-default deleteClient">
                                                                     <i class="ti ti-trash f-18"></i>
-                                                                </a>
+                                                               
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -397,7 +411,70 @@ $clients = $clientController->getClientes();
             </div>
         </div>
     </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
 
+    document.addEventListener('DOMContentLoaded', function() {
+                let deleteClient = document.querySelectorAll('.deleteClient');
+                deleteClient.forEach(button => {
+                    button.addEventListener('click', function() {
+                        swal({
+
+                                title: "¿Estás seguro?",
+                                text: "¡Una vez eliminado, no podrás recuperar esta información!",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            })
+                            .then((willDelete) => {
+                                if (willDelete) {
+                                    const form = document.getElementById(`deleteClientForm-${button.value}`);
+                                    if (form) {
+                                        form.submit();
+                                        swal("¡La información ha sido eliminada!", {
+                                            icon: "success",
+                                        });
+                                    } else {
+                                        console.error(`Formulario con id deleteClientForm-${button.value} no encontrado.`);
+                                    }
+                                }
+                            });
+                    });
+                });
+            });
+
+            document.addEventListener('DOMContentLoaded', function() {
+                const editButtons = document.querySelectorAll('.editButton');
+                editButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const userId = this.dataset.id;
+                        const userName = this.dataset.name;
+                        const userLastname = this.dataset.lastname;
+                        const userEmail = this.dataset.email;
+                        const userPhoneNumber = this.dataset.phone_number;
+                        const userPassword = this.dataset.password;
+                        const userSuscribed = this.dataset.suscribed;
+                        const userLevelId = this.dataset.level_id;
+
+                        document.getElementById('idEdit').value = userId;
+                        document.getElementById('nameEdit').value = userName;
+                        document.getElementById('lastnameEdit').value = userLastname;
+                        document.getElementById('emailEdit').value = userEmail;
+                        document.getElementById('phone_numberEdit').value = userPhoneNumber;
+                        document.getElementById('passwordEdit').value = userPassword;
+
+                        const suscribedSelect = document.getElementById('is_suscribedEdit');
+                        suscribedSelect.value = userSuscribed;
+
+                        const levelSelect = document.getElementById('level_idEdit');
+                        levelSelect.value = userLevelId;
+
+                        const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+                        editModal.show();
+                    });
+                });
+            });        
+</script>
 </body>
 <!-- [Body] end -->
 

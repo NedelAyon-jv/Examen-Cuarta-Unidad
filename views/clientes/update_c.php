@@ -3,8 +3,14 @@
 <!-- [Head] start -->
 <?php
 include "../../config.php";
-include_once "../../app/userController.php";
-$userController = new userController();
+include_once "../../app/clientController.php";
+include_once "../../app/levelsController.php";
+$levelsController = new LevelsController();
+$clientController = new clientController();
+$subscriptions = $clientController->getSuscripciones();
+$levels = $levelsController->get();
+$client = $clientController->getCliente($_GET['id']);
+
 ?>
 
 <head>
@@ -66,17 +72,19 @@ $userController = new userController();
                             <h5>Llena cada uno de los campos con lo que se te indica:</h5>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="../../app/userController.php" enctype="multipart/form-data">
+                            <form method="POST" action="../../app/clientController.php" id="editForm">
+                            <input type="text" hidden name="action" value="update_cliente">
+                            <input type="text" hidden name="id" value="<?= $client->id ?>">
                                 <!-- Nombre(s) y Apellido(s) -->
                                 <div class="row mb-3">
                                     <label class="col-lg-2 col-form-label">Nombre(s):</label>
                                     <div class="col-lg-4">
-                                        <input type="text" class="form-control" placeholder="Ingresar tu nombre(s)" name="name" />
+                                        <input type="text" class="form-control" placeholder="Ingresar tu nombre(s)" name="name" id="nameEdit" value="<?= $client->name ?>"/>
                                         <small class="form-text text-muted">Ingrese su Nombre(s)</small>
                                     </div>
                                     <label class="col-lg-2 col-form-label">Correo Electrónico:</label>
                                     <div class="col-lg-4">
-                                        <input type="email" class="form-control" placeholder="Ingresar tu Correo Electrónico " name="email" />
+                                        <input type="email" class="form-control" placeholder="Ingresar tu Correo Electrónico " name="email" id="emailEdit"   value="<?= $client->email ?>"/>
                                         <small class="form-text text-muted">Ingresar tu Correo Electrónico</small>
                                     </div>
 
@@ -88,7 +96,7 @@ $userController = new userController();
                                     <label class="col-lg-2 col-form-label">Contraseña:</label>
                                     <div class="col-lg-4">
                                         <div class="input-group">
-                                            <input type="password" class="form-control" placeholder="Ingresar tu Contraseña " name="password" />
+                                            <input type="password" class="form-control" placeholder="Ingresar tu Contraseña " name="password" id="passwordEdit" value="<?= $client->password ?>"/>
                                             <span class="input-group-text bg-transparent">
                                                 <i class="feather icon-lock"></i>
                                             </span>
@@ -97,7 +105,7 @@ $userController = new userController();
                                     </div>
                                     <label class="col-lg-2 col-form-label">Número telefónico:</label>
                                     <div class="col-lg-4">
-                                        <input type="text" class="form-control" placeholder="Ingresar tu número telefónico " name="phone_number" />
+                                        <input type="text" class="form-control" placeholder="Ingresar tu número telefónico " name="phone_number" id="phone_numberEdit" value="<?= $client->phone_number ?>"/>
                                         <small class="form-text text-muted">Ingresar tu número telefónico</small>
                                     </div>
                                 </div>
@@ -105,18 +113,24 @@ $userController = new userController();
                                 <div class="row mb-3">
                                     <label class="col-lg-2 col-form-label">Suscripción:</label>
                                     <div class="col-lg-4">
-                                        <select class="form-control" name="is_subscribed">
-                                            <option value="0">Sin suscripción</option>
-                                            <option value="1">Mensual</option>
-                                            <option value="2">Anual</option>
+                                        <select class="form-control" name="is_suscribed" id="is_suscribedEdit" value="<?= $client->is_suscribed ?>">
+                                        <?php foreach ($subscriptions as $subscription): ?>
+                                                <option value="<?php echo htmlspecialchars($subscription['id']); ?>">
+                                                    <?php echo htmlspecialchars($subscription['name']); ?>
+                                                </option>
+                                            <?php endforeach; ?>
                                         </select>
                                         <small class="form-text text-muted">Seleccione su suscripción</small>
                                     </div>
 
-                                    <label class="col-lg-2 col-form-label">Nivel de cliente:</label>
+                                    <label class="col-lg-2 col-form-label" >Nivel de cliente:</label>
                                     <div class="col-lg-4">
-                                        <select class="form-control" name="level_id">
-                                            <option value="1">Niveles</option>
+                                        <select class="form-control" name="level_id" id="level_idEdit" value="<?= $client->level_id ?>">
+                                        <?php foreach ($levels as $level): ?>
+                                                <option value="<?php echo htmlspecialchars($level->id); ?>">
+                                                    <?php echo htmlspecialchars($level->name); ?>
+                                                </option>
+                                            <?php endforeach; ?>
                                         </select>
                                         <small class="form-text text-muted">Seleccione su nivel de cliente</small>
                                     </div>
@@ -127,7 +141,6 @@ $userController = new userController();
                                 <div class="d-flex justify-content-end mt-4">
                                     <button type="submit" class="btn btn-primary me-2">Modificar cliente</button>
                                     <button type="reset" class="btn btn-secondary">Cancelar</button>
-                                    <input hidden name="action" value="add_user" />
                                 </div>
                             </form>
                         </div>
