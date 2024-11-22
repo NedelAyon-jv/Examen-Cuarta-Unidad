@@ -3,8 +3,8 @@
 <!-- [Head] start -->
 <?php
 include "../../config.php";
-include_once "../../app/userController.php";
-$userController = new userController();
+include_once "../../app/ticketController.php";
+$ticketController = new ticketController();
 ?>
 
 <head>
@@ -66,50 +66,61 @@ $userController = new userController();
                             <h5>Llena cada uno de los campos con lo que se te indica:</h5>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="../../app/userController.php" enctype="multipart/form-data">
                                 <!-- Nombre(s) y Apellido(s) -->
                                 <div class="row mb-3">
                                     <label class="col-lg-2 col-form-label">Nombre del cupon:</label>
                                     <div class="col-lg-4">
                                         <input type="text" class="form-control" placeholder="Ingrese el nombre del cupon" name="name" />
-                                        <small class="form-text text-muted">Ingrese el nombre del cupon)</small>
+                                        <small class="form-text text-muted">Ingrese el nombre del cupon</small>
                                     </div>
                                     <label class="col-lg-2 col-form-label">Código del cupon:</label>
                                     <div class="col-lg-4">
-                                        <input type="text" class="form-control" placeholder="Codigo del cupon" name="lastname" />
-                                        <small class="form-text text-muted">Codigo del cupon)</small>
+                                        <input type="text" class="form-control" placeholder="Codigo del cupon" name="code" />
+                                        <small class="form-text text-muted">Codigo del cupon</small>
                                     </div>
-
                                 </div>
-
 
                                 <!-- Correo electrónico -->
                                 <div class="row mb-3">
                                     <label class="col-lg-2 col-form-label">Porcentaje de descuento:</label>
                                     <div class="col-lg-4">
-                                        <input type="text" class="form-control" placeholder="Ingresar el Porcentaje de descuento " name="email" />
+                                        <input type="text" class="form-control" placeholder="Ingresar el Porcentaje de descuento " name="percentage" />
                                         <small class="form-text text-muted">Ingresar el Porcentaje de descuento</small>
                                     </div>
                                     <label class="col-lg-2 col-form-label">Monto minimo requerido:</label>
                                     <div class="col-lg-4">
-                                        <input type="text" class="form-control" placeholder="Ingresa el monto minimo requerido" name="phone_number" />
+                                        <input type="text" class="form-control" placeholder="Ingresa el monto minimo requerido" name="min_amount" />
                                         <small class="form-text text-muted">Ingresa el monto minimo requerido</small>
                                     </div>
                                 </div>
 
-                                <!-- Contraseña -->
+                                <!-- Campos adicionales -->
+                                <div class="row mb-3">
+                                    <label class="col-lg-2 col-form-label">Monto maximo requerido:</label>
+                                    <div class="col-lg-4">
+                                        <input type="text" class="form-control" placeholder="Ingresa el monto máximo requerido" name="max_product" />
+                                        <small class="form-text text-muted">Monto máximo requerido</small>
+                                    </div>
+                                    <label class="col-lg-2 col-form-label">Contador de usos:</label>
+                                    <div class="col-lg-4">
+                                        <input type="text" class="form-control" placeholder="Ingresa el contador de usos" name="count_uses" />
+                                        <small class="form-text text-muted">Contador de usos</small>
+                                    </div>
+                                </div>
+
+                                <!-- Fechas -->
                                 <div class="row mb-3">
                                     <label class="col-lg-2 col-form-label">Fecha de inicio:</label>
                                     <div class="col-lg-4">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Ingresa la fecha de inicio" name="text" />
+                                            <input type="date" class="form-control" placeholder="Ingresa la fecha de inicio" name="start_date" />
                                         </div>
                                         <small class="form-text text-muted">Ingresa la fecha de inicio</small>
                                     </div>
                                     <label class="col-lg-2 col-form-label">Fecha de finalización:</label>
                                     <div class="col-lg-4">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Ingresa la fecha de finalización" name="text" />
+                                            <input type="date" class="form-control" placeholder="Ingresa la fecha de finalización" name="end_date" />
                                         </div>
                                         <small class="form-text text-muted">Ingresa la fecha de finalización</small>
                                     </div>
@@ -119,13 +130,13 @@ $userController = new userController();
                                     <label class="col-lg-2 col-form-label">Usos maximos:</label>
                                     <div class="col-lg-4">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Ingresa la cantidad de usos maximos" name="text" />
+                                            <input type="text" class="form-control" placeholder="Ingresa la cantidad de usos maximos" name="max_uses" />
                                         </div>
                                         <small class="form-text text-muted">Ingresa la cantidad de usos maximos</small>
                                     </div>
                                     <label class="col-lg-2 col-form-label">Valido solo la primera compra:</label>
                                     <div class="col-lg-4">
-                                        <select class="form-select" id="validFirstPurchase" name="validFirstPurchase">
+                                        <select class="form-select" id="validFirstPurchase" name="validity">
                                             <option value="1">Sí</option>
                                             <option value="0">No</option>
                                         </select>
@@ -133,22 +144,14 @@ $userController = new userController();
                                     </div>
                                 </div>
 
-
                                 <div class="row mb-3">
                                     <label class="col-lg-2 col-form-label">Estado:</label>
                                     <div class="col-lg-4">
-                                        <select class="form-select" id="couponStatus" name="couponStatus">
+                                        <select class="form-select" id="couponStatus" name="status">
                                             <option value="1">Activo</option>
                                             <option value="0">Inactivo</option>
                                         </select>
                                         <small class="form-text text-muted">Estado del cupon: </small>
-                                    </div>
-                                    <label class="col-lg-2 col-form-label">Valido solo la primera compra:</label>
-                                    <div class="col-lg-4">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Ingresa si es valido solo la primera compra" name="text" />
-                                        </div>
-                                        <small class="form-text text-muted">Ingresa si es valido solo la primera compra</small>
                                     </div>
                                 </div>
 
@@ -156,7 +159,6 @@ $userController = new userController();
                                 <div class="d-flex justify-content-end mt-4">
                                     <button type="submit" class="btn btn-primary me-2">Modificar cupon</button>
                                     <button type="reset" class="btn btn-secondary">Cancelar</button>
-                                    <input hidden name="action" value="add_user" />
                                 </div>
                             </form>
                         </div>
