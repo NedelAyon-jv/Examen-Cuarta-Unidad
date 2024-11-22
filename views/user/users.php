@@ -1,13 +1,16 @@
 
-<!-- [Head] start -->
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 
+}
 include "../../config.php";
 include "../../app/userController.php";
 $userController = new userController();
 $users = $userController->getUser();
 ?>
-
+<!doctype html>
+<html lang="en">
 
 <head>
     <?php include "../layouts/head.php" ?>

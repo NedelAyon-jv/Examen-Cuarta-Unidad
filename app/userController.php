@@ -1,10 +1,6 @@
 <?php
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_destroy();
-    session_start();
 
-}
 include_once __DIR__ . '/../config.php';
 
 if (isset($_POST['action'])) {
