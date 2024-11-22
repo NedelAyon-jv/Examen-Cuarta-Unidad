@@ -76,16 +76,7 @@ include "../../config.php";
                       </div>
                       <h5 class="mb-0"> <?= $_SESSION['user_data']-> name?> <?= $_SESSION['user_data']-> lastname?></h5>
                       <p class="text-muted text-sm"><a href="#" class="link-primary"> <?= $_SESSION['user_data']-> email?> </a></p>
-                      <div class="row g-3">
-                        <div class="col-4">
-                          <h5 class="mb-0">?cantidad</h5>
-                          <small class="text-muted">POST</small>
-                        </div>
-                        <div class="col-4 border border-top-0 border-bottom-0">
-                          <h5 class="mb-0">?cantidad</h5>
-                          <small class="text-muted">GETS</small>
-                        </div>
-                      </div>
+                     
                     </div>
                   </div>
                   <div
