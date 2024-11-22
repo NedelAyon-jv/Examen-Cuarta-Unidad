@@ -1,7 +1,7 @@
 <?php
 include "../../config.php";
 include "../../app/ProductsController.php";
-
+include "../../app/BrandsController.php";
 // Verificar si se proporciona un slug para el producto
 if (!isset($_GET['slug'])) {
     header("Location: ../dashboard/index.html?status=error");
@@ -11,7 +11,9 @@ if (!isset($_GET['slug'])) {
 $slug = $_GET['slug'];
 $productsController = new ProductsController();
 $product = $productsController->getBySlug($slug);
+$brandsController = new BrandsController();
 
+$marcas = $brandsController->get();
 if (!$product) {
     header("Location: ../dashboard/index.html?status=not_found");
     exit();
@@ -84,17 +86,17 @@ if (!$product) {
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Marca</label>
-                                    <select class="form-select" name="brand_id" required>
-                                        <option value="">Seleccione una marca</option>
-                                        <option value="1" <?= $product->brand_id == 1 ? 'selected' : '' ?>>Marca A</option>
-                                        <option value="2" <?= $product->brand_id == 2 ? 'selected' : '' ?>>Marca B</option>
-                                        <option value="3" <?= $product->brand_id == 3 ? 'selected' : '' ?>>Marca C</option>
+                                    <select class="form-select" name="brand_id">
+                                        <?php if (isset($marcas) && count($marcas)): ?>
+                                            <?php foreach ($marcas as $marca): ?>
+                                                <option value="<?= $marca->id ?>">
+                                                    <?= $marca->name ?>
+                                                </option>
+                                            <?php endforeach ?>
+                                        <?php endif ?>
                                     </select>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Palabras claves</label>
-                                    <input type="text" class="form-control" name="keywords" value="<?= $product->keywords ?>">
-                                </div>
+                                
                             </div>
                         </div>
                     </div>

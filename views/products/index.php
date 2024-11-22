@@ -100,7 +100,7 @@ if (!is_array($products)) {
                             <p class="prod-content mb-0 text-muted"><?= $product->name ?? 'Unnamed Product' ?></p>
                           </a>
                           <div class="d-flex align-items-center justify-content-between mt-2 mb-3 flex-wrap gap-1">
-                            <h4 class="mb-0 text-truncate"><b>$<?= number_format($product->price ?? 0, 2) ?></b></h4>
+                            <h4 class="mb-0 text-truncate"><b>$$$</b></h4>
                             <div class="d-inline-flex align-items-center">
                               <i class="ph-duotone ph-star text-warning me-1"></i>
                               <small><?= $product->description ?? 'No description available' ?></small>
@@ -118,11 +118,12 @@ if (!is_array($products)) {
                               <div class="d-grid">
                               <a href="../../views/products/update.php?slug=<?= urlencode($product->slug) ?>" class="btn btn-link-secondary btn-prod-card">Editar</a>
 
-                                <form action="../../app/ProductsController.php" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
-                                  <input type="hidden" name="action" value="delete_producto">
-                                  <input type="hidden" name="product_id" value="<?= $product->id ?>">
-                                  <button type="submit" class="btn btn-link-secondary btn-prod-card">Eliminar</button>
-                                </form>
+                              <form action="../../app/ProductsController.php" method="POST" id="deleteProductForm-<?= $product->id ?>">
+                                            <input type="text" hidden name="action" value="delete_producto">
+                                            <input type="hidden" name="product_id" value="<?= $product->id ?>">
+                                        </form>
+                                  <button type="submit" class="btn btn-link-secondary btn-prod-card deleteProduct" value="<?= $product->id ?>">Eliminar</button>
+                                
                               </div>
                             </div>
                           </div>
@@ -145,6 +146,36 @@ if (!is_array($products)) {
   <?php include "../layouts/footer.php" ?>
   <?php include "../layouts/scripts.php" ?>
   <?php include "../layouts/modals.php" ?>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let deleteProduct = document.querySelectorAll('.deleteProduct');
+            deleteProduct.forEach(button => {
+                button.addEventListener('click', function() {
+                    swal({
+                            title: "¿Estás seguro?",
+                            text: "¡Una vez eliminado, no podrás recuperar esta información!",
+                            icon: "warning",
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                const form = document.getElementById(`deleteProductForm-${button.value}`);
+                                if (form) {
+                                    form.submit();
+                                    swal("¡La información ha sido eliminada!", {
+                                        icon: "success",
+                                    });
+                                } else {
+                                    console.error(`Formulario con id deleteProductForm-${button.value} no encontrado.`);
+                                }
+                            }
+                        });
+                });
+            });
+        });
+        </script>
 </body>
 <!-- [Body] end -->
 </html>

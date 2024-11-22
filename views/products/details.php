@@ -95,12 +95,12 @@
                             </ul>
                           </div>
                           <div class="carousel-item active">
-                            <img src="<?= $product->cover ?>" class="d-block w-100" alt="Imagen del producto" />
+                            <img src="<?= $product->cover ?>" class="d-block w-100" alt="Imagen del producto"onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=<?php echo urlencode($product->name); ?>';" />
                           </div>
                         </div>
                         <ol class="list-inline carousel-indicators position-relative product-carousel-indicators my-sm-3 mx-0">
                           <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="list-inline-item w-25 h-auto active">
-                            <img src="<?= $product->cover ?>" class="d-block wid-50 rounded" alt="Imagen del producto" />
+                            <img src="<?= $product->cover ?>" class="d-block wid-50 rounded" alt="Imagen del producto"onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=<?php echo urlencode($product->name); ?>';" />
                           </li>
                         </ol>
                       </div>
@@ -113,7 +113,7 @@
                     <ul>
                       <li class="mb-2">Descripción: <?= $product->description ?? 'No especificada' ?></li>
                       <li class="mb-2">Características: <?= $product->features ?? 'No especificada' ?></li>
-                      <li class="mb-2">Palabras claves: <?= implode(', ', $product->tags ?? []) ?? 'No especificada' ?></li>
+                      <li class="mb-2">Palabras claves: <?= $product->slug ?></li>
                       <li class="mb-2">Marca: <?= $product->brand->name ?? "No especificado" ?></li>
                     </ul>
                     <h3 class="mb-0 text-truncate"><b>$<?= number_format($product->price ?? 0, 2) ?></b></h3>                    <div class="row">
