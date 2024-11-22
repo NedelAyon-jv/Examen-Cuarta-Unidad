@@ -90,7 +90,11 @@ $cupones = $ticketController->getTickets();
                                         <div class="d-flex gap-2">
                                             <a class="btn btn-outline-primary flex-fill" href="<?php echo BASE_PATH . "cupones/details/" . $cupon->id; ?>">Detalles</a>
                                             <button class="btn btn-secondary flex-fill">Editar</button>
-                                            <button class="btn btn-danger flex-fill">Eliminar</button>
+                                            <form action="../../app/ticketController.php" method="POST" id="deleteTicketForm-<?= $cupon->id ?>">
+                                                <input type="text" hidden name="action" value="delete_ticket">
+                                                <input type="hidden" name="id" value="<?= $cupon->id ?>">
+                                            </form>
+                                            <button class="btn btn-danger flex-fill deleteTicket" value="<?= $cupon->id ?>">Eliminar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -98,10 +102,10 @@ $cupones = $ticketController->getTickets();
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </div>
+            </div>
+            <!-- [ Main Content ] end -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         </div>
-        <!-- [ Main Content ] end -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    </div>
     </div>
 
 
@@ -115,7 +119,37 @@ $cupones = $ticketController->getTickets();
 
     <?php include "../layouts/modals.php" ?>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let deleteTicket = document.querySelectorAll('.deleteTicket');
+            deleteTicket.forEach(button => {
+                button.addEventListener('click', function() {
+                    swal({
+                            title: "¿Estás seguro?",
+                            text: "¡Una vez eliminado, no podrás recuperar esta información!",
+                            icon: "warning",
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                const form = document.getElementById(`deleteTicketForm-${button.value}`);
+                                if (form) {
+                                    form.submit();
+                                    swal("¡La información ha sido eliminada!", {
+                                        icon: "success",
+                                    });
+                                } else {
+                                    console.error(`Formulario con id deleteTicketForm-${button.value} no encontrado.`);
+                                }
+                            }
+                        });
+                });
+            });
+        });
+    </script>
 
 </body>
 <!-- [Body] end -->
