@@ -5,6 +5,9 @@
 <?php
 include "../../config.php";
 
+include "../../app/ticketController.php";
+$ticketController = new ticketController();
+$cupones = $ticketController->getTickets();
 ?>
 
 <head>
@@ -56,46 +59,49 @@ include "../../config.php";
                 </div>
             </div>
             <!-- [ breadcrumb ] end -->
-            <a class="btn btn-outline-secondary shadow-sm rounded-pill px-4" ">Agregar Cupon</a>
+            <a class="btn btn-outline-secondary shadow-sm rounded-pill px-4" href="<?php echo BASE_PATH . "cupones/create/" ?>">Agregar Cupon</a>
 
 
             <!-- [ Main Content ] start -->
 
 
-            <div class="container my-5">
+            <div class=" container my-5">
                 <div class="row g-4">
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card shadow border-0">
-                            <div class="card-header bg-primary text-white text-center">
-                                <h4 class="mb-0">Nombre del Plan</h4>
-                                <p class="mb-0">Código: <strong>CODE123</strong></p>
-                            </div>
-                            <div class="card-body">
-                                <div class="text-center mb-4">
-                                    <div class="badge bg-info text-white fs-5">10% de Descuento</div>
+                    <?php if (isset($cupones) && count($cupones)): ?>
+                        <?php foreach ($cupones as $cupon): ?>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card shadow border-0">
+                                    <div class="card-header bg-primary text-white text-center">
+                                        <h4 class="mb-0"><?php echo $cupon->name ?></h4>
+                                        <p class="mb-0">Código: <strong><?php echo $cupon->code ?></strong></p>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="text-center mb-4">
+                                            <div class="badge bg-info text-white fs-5"><?php echo $cupon->percentage_discount ?>% de Descuento</div>
+                                        </div>
+                                        <ul class="list-unstyled mb-4">
+                                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> Descuento de cantidad: <?php echo $cupon->amount_discount ?></li>
+                                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> Cantidad mínima requerida:<?php echo $cupon->min_amount_required ?></li>
+                                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> Productos mínimos requeridos:<?php echo $cupon->min_product_required ?></li>
+                                            <li><i class="bi bi-calendar-fill text-primary me-2"></i> Desde:<?php echo $cupon->start_date ?></li>
+                                            <li><i class="bi bi-calendar-fill text-primary me-2"></i> Hasta:<?php echo $cupon->end_date ?></li>
+                                            <li><i class="bi bi-tags-fill text-warning me-2"></i> Tipo de cupón:<?php echo is_null($cupon->couponable_type) ? "No definido" : $cupon->couponable_type; ?></li>
+                                        </ul>
+                                        <div class="d-flex gap-2">
+                                            <a class="btn btn-outline-primary flex-fill" href="<?php echo BASE_PATH . "cupones/details/" . $cupon->id; ?>">Detalles</a>
+                                            <button class="btn btn-secondary flex-fill">Editar</button>
+                                            <button class="btn btn-danger flex-fill">Eliminar</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <ul class="list-unstyled mb-4">
-                                    <li><i class="bi bi-check-circle-fill text-success me-2"></i> Descuento de cantidad: 10%</li>
-                                    <li><i class="bi bi-check-circle-fill text-success me-2"></i> Cantidad mínima requerida: 5</li>
-                                    <li><i class="bi bi-check-circle-fill text-success me-2"></i> Productos mínimos requeridos: 2</li>
-                                    <li><i class="bi bi-calendar-fill text-primary me-2"></i> Desde: 01/01/2024</li>
-                                    <li><i class="bi bi-calendar-fill text-primary me-2"></i> Hasta: 31/12/2024</li>
-                                    <li><i class="bi bi-tags-fill text-warning me-2"></i> Tipo de cupon: Descuento fijo</li>
-                                </ul>
-                                <div class="d-flex gap-2">
-                                    <button class="btn btn-outline-primary flex-fill">Detalles</button>
-                                    <button class="btn btn-secondary flex-fill">Editar</button>
-                                    <button class="btn btn-danger flex-fill">Eliminar</button>
-                                </div>
                             </div>
-                        </div>
-                    </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
-            </div>
-
-            <!-- [ Main Content ] end -->
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         </div>
+        <!-- [ Main Content ] end -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
     </div>
 
 
