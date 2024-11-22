@@ -101,7 +101,9 @@ $Brands = $BrandsController->get();
                             </td>
                             <td class="text-center"><?= implode(' ', array_slice(explode(' ', $product->description), 0, 3)) . '...' ?></td>
                             <td class="text-center">
-                              <img src="../assets/images/application/img-prod-brand-1.png" alt="user-image" class="wid-40" />
+                            <?=
+                              $Brand->name
+                              ?>
                               <div class="prod-action-links">
                                 <ul class="list-inline me-auto mb-0">
                                   <!-- Ver producto -->

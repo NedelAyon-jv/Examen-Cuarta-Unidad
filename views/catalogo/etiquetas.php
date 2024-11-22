@@ -3,6 +3,9 @@
 <!-- [Head] start -->
 <?php include "../../config.php";
 include "../../app/tagsController.php";
+include "../../app/BrandsController.php";
+$brandsController = new BrandsController();
+$brands = $brandsController->get();
 $tagsController = new tagsController();
 $tags = $tagsController->get();
 ?>
@@ -104,7 +107,16 @@ $tags = $tagsController->get();
                             <td><?= $tag->name ?></td>
                             <td class="text-center"><?= implode(' ', array_slice(explode(' ', $product->description), 0, 3)) . '...' ?>n</td>
                             <td class="text-center">
-                              <img src="../assets/images/application/img-prod-brand-1.png" alt="user-image" class="wid-40" />
+                            <?php
+                              $brandName = 'Sin Marca'; 
+                              foreach ($brands as $brand) {
+                                  if ($brand->id === $product->brand_id) {
+                                      $brandName = $brand->name;
+                                      break;
+                                  }
+                              }
+                              echo $brandName;
+                              ?>
                               <div class="prod-action-links">
                                 <ul class="list-inline me-auto mb-0">
                                   <!-- Ver producto -->
