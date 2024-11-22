@@ -142,10 +142,12 @@
                     </a>
                   </li>
                   <li>
-                    <a class="pc-user-links">
+                  <form action="../../app/AuthController.php" method="POST" style="margin: 0; padding: 0;">
+                    <a class="pc-user-links" href="<?php echo BASE_PATH . "" ?>" type="submit" name="action" value="logout">
                       <i class="ph-duotone ph-power"></i>
                       <span>Cerrar Sesion</span>
                     </a>
+                  </form>
                   </li>
                 </ul>
               </div>

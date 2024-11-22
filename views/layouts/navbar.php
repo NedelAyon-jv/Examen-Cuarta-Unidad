@@ -396,10 +396,11 @@
                 </li>
                 <li class="list-group-item">
                   
-                  <a href="#" class="dropdown-item">
+                  <a href="<?php echo BASE_PATH . "" ?>" type="submit" name="action" value="logout" class="dropdown-item">
                     <span class="d-flex align-items-center">
                       <i class="ph-duotone ph-power"></i>
                       <span>Logout</span>
+                    </a>
                     </span>
                   </a>
                 </li>
