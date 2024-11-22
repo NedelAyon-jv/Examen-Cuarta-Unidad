@@ -2,7 +2,9 @@
 <html lang="en">
 <!-- [Head] start -->
 <?php
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include "../../config.php";
 include "../../app/userController.php";
 $userController = new userController();
