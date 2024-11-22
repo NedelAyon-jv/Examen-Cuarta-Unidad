@@ -6,8 +6,9 @@
 include "../../config.php";
 include "../../app/ordersController.php";
 include "../../app/clientController.php";
-$clientController = new clientController();
+
 $ordersController = new ordersController();
+$clientController = new clientController();
 $orders = $ordersController->getOrders();
 $clients = $clientController->getClientes();
 ?>
@@ -147,7 +148,7 @@ $clients = $clientController->getClientes();
                                                                 <ul class="list-inline me-auto mb-0">
                                                                     <!-- Ver orden -->
                                                                     <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="View">
-                                                                    <a href="<?php echo BASE_PATH . "ordenes/details/" . $order->id; ?>" class="avtar avtar-xs btn-link-secondary btn-pc-default">                                                                            <i class="ti ti-eye f-18"></i>
+                                                                        <a href="<?php echo BASE_PATH . "ordenes/details/" . $order->id; ?>" class="avtar avtar-xs btn-link-secondary btn-pc-default"> <i class="ti ti-eye f-18"></i>
                                                                         </a>
                                                                     </li>
                                                                     <!-- Editar orden -->
@@ -157,10 +158,14 @@ $clients = $clientController->getClientes();
                                                                         </a>
                                                                     </li>
                                                                     <!-- Eliminar orden -->
+                                                                    <form action="../../app/ordersController.php" method="POST" id="deleteOrderForm-<?= $order->id ?>">
+                                                                        <input type="text" hidden name="action" value="delete_order">
+                                                                        <input type="hidden" name="id" value="<?= $order->id ?>">
+                                                                    </form>
                                                                     <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="Delete">
-                                                                        <a href="#" class="avtar avtar-xs btn-link-danger btn-pc-default">
+                                                                        <button value="<?= $order->id ?>" class="avtar avtar-xs btn-link-danger btn-pc-default deleteOrder">
                                                                             <i class="ti ti-trash f-18"></i>
-                                                                        </a>
+                                                                            </a>
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -259,6 +264,39 @@ $clients = $clientController->getClientes();
         <script src="../assets/js/plugins/simple-datatables.js"></script>
         <!-- [Page Specific JS] end -->
         <?php include "../layouts/modals.php" ?>
+
+
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                let deleteOrder = document.querySelectorAll('.deleteOrder');
+                deleteOrder.forEach(button => {
+                    button.addEventListener('click', function() {
+                        swal({
+
+                                title: "¿Estás seguro?",
+                                text: "¡Una vez eliminado, no podrás recuperar esta información!",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            })
+                            .then((willDelete) => {
+                                if (willDelete) {
+                                    const form = document.getElementById(`deleteOrderForm-${button.value}`);
+                                    if (form) {
+                                        form.submit();
+                                        swal("¡La información ha sido eliminada!", {
+                                            icon: "success",
+                                        });
+                                    } else {
+                                        console.error(`Formulario con id deleteOrderForm-${button.value} no encontrado.`);
+                                    }
+                                }
+                            });
+                    });
+                });
+            });
+        </script>
 </body>
 <!-- [Body] end -->
 
