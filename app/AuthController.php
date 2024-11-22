@@ -63,7 +63,7 @@ require_once "../config.php";
 
 				header("Location:" . BASE_PATH . "home");
 			}else{
-				header("Location:" . BASE_PATH . "index.php");
+				header("Location:" . BASE_PATH . "index.php?error=1");
 			}
 
 		}
