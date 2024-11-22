@@ -101,7 +101,7 @@ $levels = $levelsController->get();
                                     </div>
                                     <label class="col-lg-2 col-form-label">Número telefónico:</label>
                                     <div class="col-lg-4">
-                                        <input type="text" class="form-control" placeholder="Ingresar tu número telefónico " name="phone_number" />
+                                        <input type="number" class="form-control" placeholder="Ingresar tu número telefónico " name="phone_number" />
                                         <small class="form-text text-muted">Ingresar tu número telefónico</small>
                                     </div>
                                 </div>
