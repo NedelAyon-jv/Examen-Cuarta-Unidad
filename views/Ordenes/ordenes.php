@@ -2,8 +2,14 @@
 <html lang="en">
 <!-- [Head] start -->
 <?php
-include "../../config.php";
 
+include "../../config.php";
+include "../../app/ordersController.php";
+include "../../app/clientController.php";
+$clientController = new clientController();
+$ordersController = new ordersController();
+$orders = $ordersController->getOrders();
+$clients = $clientController->getClientes();
 ?>
 
 <head>
@@ -87,50 +93,84 @@ include "../../config.php";
                                         </thead>
 
                                         <tbody>
+                                            <?php if (isset($orders) && count($orders)): ?>
+                                                <?php foreach ($orders as $order): ?>
+                                                    <!-- Producto -->
+                                                    <tr>
 
-                                            <!-- Producto -->
-                                            <tr>
+                                                        <td class="text-end"> <?php echo $order->id ?> </td>
+                                                        <td>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <h6 class="mb-1 text-center"><?php
+                                                                                                    $clientName = 'Cliente Desconocido';
+                                                                                                    foreach ($clients as $client) {
+                                                                                                        if ($client->id === $order->client_id) {
+                                                                                                            $clientName = $client->name;
+                                                                                                            break;
+                                                                                                        }
+                                                                                                    }
+                                                                                                    echo $clientName;
+                                                                                                    ?></h6>
+                                                                    <p class="text-muted f-12 mb-0 text-center"><?php echo $order->folio ?></p>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center"><?php echo $order->client_id ?></td>
+                                                        <td class="text-center"><?php
+                                                                                switch ($order->order_status_id) {
+                                                                                    case 1:
+                                                                                        echo 'Pendiente';
+                                                                                        break;
+                                                                                    case 2:
+                                                                                        echo 'Procesando';
+                                                                                        break;
+                                                                                    case 3:
+                                                                                        echo 'Enviado';
+                                                                                        break;
+                                                                                    case 4:
+                                                                                        echo 'Completado';
+                                                                                        break;
+                                                                                    case 5:
+                                                                                        echo 'Cancelado';
+                                                                                        break;
+                                                                                    case 6:
+                                                                                        echo 'Devuelto';
+                                                                                        break;
+                                                                                    default:
+                                                                                        echo 'Estado Desconocido';
+                                                                                }
+                                                                                ?></td>
+                                                        <td class="text-center">$<?php echo $order->total ?></td>
+                                                        <td class="text-center">
+                                                            <div class="prod-action-links">
+                                                                <ul class="list-inline me-auto mb-0">
+                                                                    <!-- Ver orden -->
+                                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="View">
+                                                                        <a href="#" class="avtar avtar-xs btn-link-secondary btn-pc-default" data-bs-toggle="offcanvas" data-bs-target="#productOffcanvas">
+                                                                            <i class="ti ti-eye f-18"></i>
+                                                                        </a>
+                                                                    </li>
+                                                                    <!-- Editar orden -->
+                                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="Edit">
+                                                                        <a href="ecom_product-add.html" class="avtar avtar-xs btn-link-success btn-pc-default">
+                                                                            <i class="ti ti-edit-circle f-18"></i>
+                                                                        </a>
+                                                                    </li>
+                                                                    <!-- Eliminar orden -->
+                                                                    <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="Delete">
+                                                                        <a href="#" class="avtar avtar-xs btn-link-danger btn-pc-default">
+                                                                            <i class="ti ti-trash f-18"></i>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </td>
 
-                                                <td class="text-end">1</td>
-                                                <td>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <h6 class="mb-1 text-center"> Cliente Ejemplo </h6>
-                                                            <p class="text-muted f-12 mb-0 text-center">123456789</p>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">Nivel 1</td>
-                                                <td class="text-center">cliente@example.com</td>
-                                                <td class="text-center">Mensual</td>
-                                                <td class="text-center">
-                                                    <div class="prod-action-links">
-                                                        <ul class="list-inline me-auto mb-0">
-                                                            <!-- Ver orden -->
-                                                            <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="View">
-                                                                <a href="#" class="avtar avtar-xs btn-link-secondary btn-pc-default" data-bs-toggle="offcanvas" data-bs-target="#productOffcanvas">
-                                                                    <i class="ti ti-eye f-18"></i>
-                                                                </a>
-                                                            </li>
-                                                            <!-- Editar orden -->
-                                                            <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="Edit">
-                                                                <a href="ecom_product-add.html" class="avtar avtar-xs btn-link-success btn-pc-default">
-                                                                    <i class="ti ti-edit-circle f-18"></i>
-                                                                </a>
-                                                            </li>
-                                                            <!-- Eliminar orden -->
-                                                            <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="Delete">
-                                                                <a href="#" class="avtar avtar-xs btn-link-danger btn-pc-default">
-                                                                    <i class="ti ti-trash f-18"></i>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </td>
 
-
-                                            </tr>
-
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
                                         </tbody>
                                     </table>
                                 </div>
