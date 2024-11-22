@@ -57,7 +57,7 @@ if (isset($_POST['action'])) {
 class ticketController
 {
 
-    public function addTicket($name_ticket, $code_ticket, $percentage_ticket, $min_amount_required, $max_product_required, $start_date_ticket, $end_date_ticket, $max_uses_ticket, $count_uses_ticket, $validity_ticket, $status_ticket)
+    public function addTicket($name_ticket, $code_ticket, $percentage_ticket, $min_amount_required, $min_product_required, $start_date_ticket, $end_date_ticket, $max_uses_ticket, $count_uses_ticket, $validity_ticket, $status_ticket)
     {
 
         $curl = curl_init();
@@ -76,7 +76,7 @@ class ticketController
                 'code' => $code_ticket,
                 'percentage_discount' => $percentage_ticket,
                 'min_amount_required' => $min_amount_required,
-                'min_product_required' =>  $min_amount_required,
+                'min_product_required' =>  $min_product_required,
                 'start_date' => $start_date_ticket,
                 'end_date' => $end_date_ticket,
                 'max_uses' => $max_uses_ticket,
@@ -248,4 +248,5 @@ class ticketController
             return [];
         }
     }
+
 }
