@@ -10,7 +10,7 @@ include "config.php";
 <head>
   <?php include "views/layouts/head.php" ?>
 </head>
-<!-- [Head] end -->
+<!-- [Head] end  -->
 <!-- [Body] Start -->
 
 <body data-pc-preset="preset-1" data-pc-sidebar-theme="light" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme="light">
