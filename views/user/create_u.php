@@ -1,12 +1,11 @@
+<?php
+    include "../../config.php";
+    include_once "../../app/userController.php";
+    $userController = new userController();
+?>
 <!doctype html>
 <html lang="en">
 <!-- [Head] start -->
-<?php
-include "../../config.php";
-include_once "../../app/userController.php";
-$userController = new userController();
-?>
-
 <head>
     <?php include "../layouts/head.php" ?>
 </head>

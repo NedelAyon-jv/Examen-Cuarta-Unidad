@@ -1,6 +1,3 @@
-<!doctype html>
-<html lang="en">
-<!-- [Head] start -->
 <?php include "../../config.php";
 include "../../app/tagsController.php";
 include "../../app/BrandsController.php";
@@ -11,7 +8,9 @@ $tags = $tagsController->get();
 ?>
 
 <?php include "../layouts/head.php" ?>
-
+<!doctype html>
+<html lang="en">
+<!-- [Head] start -->
 <!-- [Head] end -->
 <!-- [Body] Start -->
 

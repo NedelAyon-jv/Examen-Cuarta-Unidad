@@ -1,6 +1,3 @@
-<!doctype html>
-<html lang="en">
-<!-- [Head] start -->
 <?php
 
 include "../../config.php";
@@ -9,7 +6,9 @@ $userController = new userController();
 
 $usuario = $userController->getUserById($_GET['id']);
 ?>
-
+<!doctype html>
+<html lang="en">
+<!-- [Head] start -->
 <head>
     <?php include "../layouts/head.php" ?>
 </head>

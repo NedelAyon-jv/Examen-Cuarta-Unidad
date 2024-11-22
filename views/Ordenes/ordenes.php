@@ -1,8 +1,4 @@
-<!doctype html>
-<html lang="en">
-<!-- [Head] start -->
 <?php
-
 include "../../config.php";
 include "../../app/ordersController.php";
 include "../../app/clientController.php";
@@ -12,7 +8,9 @@ $clientController = new clientController();
 $orders = $ordersController->getOrders();
 $clients = $clientController->getClientes();
 ?>
-
+<!doctype html>
+<html lang="en">
+<!-- [Head] start -->
 <head>
     <?php include "../layouts/head.php" ?>
 </head>

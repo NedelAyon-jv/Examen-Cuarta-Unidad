@@ -1,13 +1,12 @@
-<!doctype html>
-<html lang="en">
-<!-- [Head] start -->
 <?php include "../../config.php";
 include "../../app/BrandsController.php";
 $BrandsController = new BrandsController();
 $Brands = $BrandsController->get();
 ?>
 <?php include "../layouts/head.php" ?>
-
+<!doctype html>
+<html lang="en">
+<!-- [Head] start -->
 <!-- [Head] end -->
 <!-- [Body] Start -->
 

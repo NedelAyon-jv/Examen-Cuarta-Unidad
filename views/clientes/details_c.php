@@ -1,7 +1,3 @@
-<!doctype html>
-<html lang="en">
-
-<!-- [Head] -->
 <?php
 
 include "../../config.php";
@@ -10,12 +6,16 @@ $clientController = new clientController();
 $client = $clientController->getCliente($_GET['id']);
 
 ?>
-
+<!doctype html>
+<html lang="en">
 <head>
     <?php
     include "../layouts/head.php";
     ?>
 </head>
+
+
+<!-- [Head] -->
 
 <!-- [Body] -->
 

@@ -1,6 +1,3 @@
-<!doctype html>
-<html lang="en">
-<!-- [Head] start -->
 <?php include "../../config.php";
 include "../../app/categoriesController.php";
 include "../../app/BrandsController.php";
@@ -10,7 +7,9 @@ $categoriesController = new CategoriesController();
 $categories = $categoriesController->get();
 ?>
 <?php include "../layouts/head.php" ?>
-
+<!doctype html>
+<html lang="en">
+<!-- [Head] start -->
 <!-- [Head] end -->
 <!-- [Body] Start -->
 

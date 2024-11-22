@@ -1,6 +1,3 @@
-<!doctype html>
-<html lang="en">
-<!-- [Head] start -->
 <?php
 session_start();
 include "../../config.php";
@@ -16,7 +13,9 @@ $adress = $adressController->getByClientID($order->client_id);
 $clients = $clientController->getClientes();
 
 ?>
-
+<!doctype html>
+<html lang="en">
+<!-- [Head] start -->
 <head>
   <?php include "../layouts/head.php" ?>
 </head>

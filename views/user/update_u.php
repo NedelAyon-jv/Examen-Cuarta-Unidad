@@ -1,12 +1,11 @@
-<!doctype html>
-<html lang="en">
-<!-- [Head] start -->
 <?php include "../../config.php"; 
 include_once "../../app/userController.php";
 $userController = new userController();
 $user = $userController->getUserById($_GET['id']);
 ?>
-
+<!doctype html>
+<html lang="en">
+<!-- [Head] start -->
 
 <head>
     <?php include "../layouts/head.php"; ?>

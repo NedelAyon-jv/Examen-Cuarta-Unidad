@@ -1,6 +1,3 @@
-<!doctype html>
-<html lang="en">
-<!-- [Head] start -->
 <?php
 include "../../config.php";
 include_once "../../app/clientController.php";
@@ -15,6 +12,10 @@ $levels = $levelsController->get();
 <head>
     <?php include "../layouts/head.php" ?>
 </head>
+
+<!doctype html>
+<html lang="en">
+<!-- [Head] start -->
 <!-- [Head] end -->
 <!-- [Body] Start -->
 

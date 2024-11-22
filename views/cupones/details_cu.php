@@ -1,7 +1,3 @@
-<!doctype html>
-<html lang="en">
-
-<!-- [Head] -->
 <?php
 include "../../config.php";
 include "../../app/ticketController.php";
@@ -9,11 +5,11 @@ include "../../app/ticketController.php";
 $ticketController = new ticketController();
 $cupon = $ticketController->getTicket($_GET['id']);
 
-
-
-
 ?>
+<!doctype html>
+<html lang="en">
 
+<!-- [Head] -->
 <head>
     <?php include "../layouts/head.php"; ?>
 </head>
