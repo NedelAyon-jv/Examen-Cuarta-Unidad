@@ -1,3 +1,3 @@
 <?php
 
-define('BASE_PATH', 'examen-cuarta-unidad-production.up.railway.app/');
+define('BASE_PATH', 'https://examen-cuarta-unidad-production.up.railway.app/');
