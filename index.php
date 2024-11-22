@@ -60,7 +60,16 @@ session_start();
   <!-- [ Main Content ] end -->
 
   <?php include "views/layouts/scripts.php" ?>
-
+  <?php if (isset($_GET['error']) && $_GET['error'] == '1') { ?>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      Swal.fire({
+        icon: 'error',
+        title: '¡Credenciales incorrectas!',
+        text: 'Por favor, verifica tu correo electrónico y contraseña.',
+      });
+    </script>
+  <?php } ?>
 
 </body>
 <!-- [Body] end -->
