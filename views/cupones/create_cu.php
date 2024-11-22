@@ -66,6 +66,7 @@ $ticketController = new ticketController();
                             <h5>Llena cada uno de los campos con lo que se te indica:</h5>
                         </div>
                         <div class="card-body">
+                            <form method="POST" action="../../app/ticketController.php">
                                 <!-- Nombre(s) y Apellido(s) -->
                                 <div class="row mb-3">
                                     <label class="col-lg-2 col-form-label">Nombre del cupon:</label>
@@ -159,6 +160,7 @@ $ticketController = new ticketController();
                                 <div class="d-flex justify-content-end mt-4">
                                     <button type="submit" class="btn btn-primary me-2">Crear cupon</button>
                                     <button type="reset" class="btn btn-secondary">Cancelar</button>
+                                    <input type="hidden" name="action" value="add_ticket" />
                                 </div>
                             </form>
                         </div>
