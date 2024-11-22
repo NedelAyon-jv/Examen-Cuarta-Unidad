@@ -89,7 +89,19 @@ $cupones = $ticketController->getTickets();
                                         </ul>
                                         <div class="d-flex gap-2">
                                             <a class="btn btn-outline-primary flex-fill" href="<?php echo BASE_PATH . "cupones/details/" . $cupon->id; ?>">Detalles</a>
-                                            <button class="btn btn-secondary flex-fill">Editar</button>
+                                            <a class="btn btn-secondary flex-fill" href="<?php echo BASE_PATH . "cupones/update/" . $cupon->id; ?>"
+                                            data-id="<?php echo $cupon->id; ?>"
+                                            data-name="<?php echo htmlspecialchars($cupon->name, ENT_QUOTES); ?>"
+                                            data-code="<?php echo htmlspecialchars($cupon->code, ENT_QUOTES); ?>"
+                                            data-percentage_discount="<?php echo htmlspecialchars($cupon->percentage_discount, ENT_QUOTES); ?>"
+                                            data-amount_discount="<?php echo htmlspecialchars($cupon->amount_discount, ENT_QUOTES); ?>"
+                                            data-min_amount_required="<?php echo htmlspecialchars($cupon->min_amount_required, ENT_QUOTES); ?>"
+                                            data-min_product_required="<?php echo htmlspecialchars($cupon->min_product_required, ENT_QUOTES); ?>"
+                                            data-start_date="<?php echo htmlspecialchars($cupon->start_date, ENT_QUOTES); ?>"
+                                            data-end_date="<?php echo htmlspecialchars($cupon->end_date, ENT_QUOTES); ?>"
+                                            data-couponable_type="<?php echo htmlspecialchars($cupon->couponable_type, ENT_QUOTES); ?>"
+
+                                            >Editar</a>
                                             <form action="../../app/ticketController.php" method="POST" id="deleteTicketForm-<?= $cupon->id ?>">
                                                 <input type="text" hidden name="action" value="delete_ticket">
                                                 <input type="hidden" name="id" value="<?= $cupon->id ?>">
@@ -149,6 +161,40 @@ $cupones = $ticketController->getTickets();
                 });
             });
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const editButtons = document.querySelectorAll('.editButton');
+            editButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const ticketId = this.dataset.id;
+                    const ticketName = this.dataset.name;
+                    const ticketCode = this.dataset.code;
+                    const ticketPercentageDiscount = this.dataset.percentage_discount;
+                    const ticketAmountDiscount = this.dataset.amount_discount;
+                    const ticketMinAmountRequired = this.dataset.min_amount_required;
+                    const ticketMinProductRequired = this.dataset.min_product_required;
+                    const ticketStartDate = this.dataset.start_date;
+                    const ticketEndDate = this.dataset.end_date;
+                    const ticketCouponableType = this.dataset.couponable_type;
+                    
+
+                    document.getElementById('idEdit').value = ticketId;
+                    document.getElementById('nameEdit').value = ticketName;
+                    document.getElementById('codeEdit').value = ticketCode;
+                    document.getElementById('percentageDiscountEdit').value = ticketPercentageDiscount;
+                    document.getElementById('amountDiscountEdit').value = ticketAmountDiscount;
+                    document.getElementById('minAmountRequiredEdit').value = ticketMinAmountRequired;
+                    document.getElementById('minProductRequiredEdit').value = ticketMinProductRequired;
+                    document.getElementById('startDateEdit').value = ticketStartDate;
+                    document.getElementById('endDateEdit').value = ticketEndDate;
+                    document.getElementById('couponableTypeEdit').value = ticketCouponableType;
+                
+                    const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+                    editModal.show();
+                });
+            });
+        });
+                    
     </script>
 
 </body>
