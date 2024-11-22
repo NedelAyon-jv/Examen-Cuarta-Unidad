@@ -147,7 +147,7 @@ $clients = $clientController->getClientes();
                                                                 <ul class="list-inline me-auto mb-0">
                                                                     <!-- Ver orden -->
                                                                     <li class="list-inline-item align-bottom" data-bs-toggle="tooltip" title="View">
-                                                                    <a href="<?php echo BASE_PATH . "ordeners/details/" . $order->id; ?>" class="avtar avtar-xs btn-link-secondary btn-pc-default">                                                                            <i class="ti ti-eye f-18"></i>
+                                                                    <a href="<?php echo BASE_PATH . "ordenes/details/" . $order->id; ?>" class="avtar avtar-xs btn-link-secondary btn-pc-default">                                                                            <i class="ti ti-eye f-18"></i>
                                                                         </a>
                                                                     </li>
                                                                     <!-- Editar orden -->
