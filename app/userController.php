@@ -1,7 +1,9 @@
 <?php
+
 if (session_status() === PHP_SESSION_NONE) {
+    session_destroy();
     session_start();
-    echo "loq  sea";
+
 }
 include_once __DIR__ . '/../config.php';
 
