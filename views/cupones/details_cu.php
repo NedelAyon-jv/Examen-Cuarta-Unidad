@@ -102,7 +102,7 @@ $cupon = $ticketController->getTicket($_GET['id']);
                             <h5 class="mb-0">Widgets Totales de Descuentos</h5>
                         </div>
                         <div class="card-body text-center p-4">
-                            <h1 class="display-4 fw-bold text-success">$<?php echo number_format($totalDiscount, 0); ?></h1>
+                            <h1 class="display-4 fw-bold text-success">$0</h1>
                             <p class="text-muted">Total de Widgets Comprados</p>
                         </div>
                     </div>
